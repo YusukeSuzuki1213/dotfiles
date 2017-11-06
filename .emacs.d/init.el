@@ -219,6 +219,7 @@
 
 ;;Magit(git管理)
 (require 'magit)
+(global-set-key (kbd "C-c m") 'magit-status)
 
 ;;multiple-cursors(カーソルを複数に)
 (require 'multiple-cursors)
