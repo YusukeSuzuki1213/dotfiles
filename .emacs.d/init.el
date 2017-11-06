@@ -14,6 +14,9 @@
 ;;クリップボードとキルリング共有
 (setq x-select-enable-clipboard t)
 
+;;背景の透明度
+(set-frame-parameter nil 'alpha 90)
+
 ;;起動時に画面横2分割
 (setq inhibit-startup-message t)
 (setq w (selected-window))
