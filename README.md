@@ -18,8 +18,7 @@ sudo apt install emacs25
 ```
 
 ### Installation of Cask
-I use Cask that is a project management tool for Emacs.
-
+I use Cask to manage Emacs packages.
 ```shell
 $ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 ```
