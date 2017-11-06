@@ -218,7 +218,7 @@
 (cask-initialize)
 
 ;;Magit(git管理)
-;;(require 'magit)
+(require 'magit)
 
 ;;multiple-cursors(カーソルを複数に)
 (require 'multiple-cursors)
@@ -234,6 +234,7 @@
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
 
 ;;dashboard(起動画面カスタマイズ)
+;;CUI環境では崩れる可能性あり
 (require 'dashboard)
 ;;(setq inhibit-startup-message t)
 (dashboard-setup-startup-hook)			
