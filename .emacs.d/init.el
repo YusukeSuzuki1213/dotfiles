@@ -157,6 +157,9 @@
 (electric-layout-mode t)
 (add-to-list 'electric-layout-rules '(?{ . after) )
 
+;;行のどの位置からでも行切り取り
+(global-set-key (kbd "C-c x") (lambda () (interactive) (beginning-of-line) (kill-line)))
+
 ;;行のどの位置からでも行コピー
 (global-set-key (kbd "C-c c") 'copy-whole-line)
 (defun copy-whole-line (&optional arg)
