@@ -3,7 +3,6 @@
 (source marmalade)
 (source melpa)
 
-;;デフォルトでついてきたやつ(一部)
 (depends-on "cask")
 (depends-on "flycheck-cask")
 (depends-on "magit")
@@ -13,3 +12,4 @@
 (depends-on "dashboard")
 (depends-on "undo-tree")
 (depends-on "company")
+(depends-on "smooth-scroll")
