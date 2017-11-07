@@ -221,6 +221,14 @@
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 
+;;yasnippet(スニペット登録)
+(require 'yasnippet)
+(require 'helm-c-yasnippet)
+(setq helm-yas-space-match-any-greedy t)
+(global-set-key (kbd "C-c s") 'helm-yas-complete)
+(yas-global-mode 1)
+(yas-load-directory "~/dotfiles/.emacs.d")
+
 ;;; smooth-scroll
 (require 'smooth-scroll)
 (smooth-scroll-mode t)
