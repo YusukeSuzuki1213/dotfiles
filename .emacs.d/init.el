@@ -108,6 +108,9 @@
 ;;エディタ設定
 ;;------------------------------------------------------------------------------------------------------------------------------------------------
 
+;;指定行に移動
+(define-key global-map (kbd "C-c j") 'goto-line)
+
 ;;スクロール
 (setq scroll-conservatively 1)
 (setq next-screen-context-lines 1)
@@ -163,7 +166,6 @@
 ;;行のどの位置からでも行コピー
 (global-set-key (kbd "C-c c") 'copy-whole-line)
 (defun copy-whole-line (&optional arg)
-  "Copy current line."
   (interactive "p")
   (or arg (setq arg 1))
   (if (and (> arg 0) (eobp) (save-excursion (forward-visible-line 0) (eobp)))
@@ -275,9 +277,10 @@
 (global-set-key (kbd "C-c h") 'helm-for-files);;色々検索
 (global-set-key (kbd "C-c k") 'helm-show-kill-ring);;キルリング履歴
 (global-set-key (kbd "C-x C-f") 'helm-find-files);;ファイル検索
-(global-set-key (kbd "C-c j") 'helm-imenu);;関数や定義検索
+;;(global-set-key (kbd "C-c j") 'helm-imenu);;関数や定義検索
 (global-set-key (kbd "C-c f") 'helm-occur);;文字列検索
 (global-set-key (kbd "C-c b") 'helm-google-suggest);;ブラウザ検索
+(global-set-key (kbd "C-x C-x") 'helm-mark-ring);;マークリング履歴
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action);;タブ補完
 (setq recentf-max-saved-items 100) ;; 最近のファイル100個を保存する
 (setq recentf-exclude '("/TAGS$" "/var/tmp/")) ;;最近のファイルに加えない
