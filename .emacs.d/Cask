@@ -1,7 +1,7 @@
 (source gnu)
 (source melpa)
 (source marmalade)
-(source melpa)
+
 
 (depends-on "cask")
 (depends-on "flycheck-cask")
@@ -15,3 +15,4 @@
 (depends-on "smooth-scroll")
 (depends-on "yasnippet")
 (depends-on "helm-c-yasnippet")
+(depends-on "use-package")

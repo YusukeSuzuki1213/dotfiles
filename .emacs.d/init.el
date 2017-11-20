@@ -223,24 +223,26 @@
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 
+(require 'use-package)
+
 ;;yasnippet(スニペット登録)
-(require 'yasnippet)
-(require 'helm-c-yasnippet)
+(use-package yasnippet)
+(use-package helm-c-yasnippet)
 (setq helm-yas-space-match-any-greedy t)
 (global-set-key (kbd "C-c s") 'helm-yas-complete)
 (yas-global-mode 1)
 (yas-load-directory "~/dotfiles/.emacs.d")
 
 ;;; smooth-scroll
-(require 'smooth-scroll)
+(use-package smooth-scroll)
 (smooth-scroll-mode t)
 
 ;;Magit(git管理)
-(require 'magit)
+(use-package magit)
 (global-set-key (kbd "C-c m") 'magit-status)
 
 ;;multiple-cursors(カーソルを複数に)
-(require 'multiple-cursors)
+(use-package multiple-cursors)
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
@@ -254,24 +256,24 @@
 
 ;;dashboard(起動画面カスタマイズ)
 ;;CUI環境では崩れる可能性あり
-(require 'dashboard)
+(use-package dashboard)
 ;;(setq inhibit-startup-message t)
 (dashboard-setup-startup-hook)			
 ;;(setq dashboard-items '((recents  . 5)))
 
 ;;flycheck(シンタックスチェック)
-(require 'flycheck)
+(use-package flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-cask-setup))
 
 ;;undo-tree(C-x u)
-(require 'undo-tree)
+(use-package undo-tree)
 (global-undo-tree-mode)
 (global-set-key (kbd "C-c .") 'undo-tree-redo)
 
 ;;helmの設定
-(require 'helm-config)
+(use-package helm-config)
 (helm-mode 1)
 (semantic-mode 1)
 (global-set-key (kbd "C-c h") 'helm-for-files);;色々検索
