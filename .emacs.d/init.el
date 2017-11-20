@@ -227,25 +227,28 @@
 
 ;;yasnippet(スニペット登録)
 (use-package yasnippet)
-(use-package helm-c-yasnippet)
-(setq helm-yas-space-match-any-greedy t)
-(global-set-key (kbd "C-c s") 'helm-yas-complete)
-(yas-global-mode 1)
-(yas-load-directory "~/dotfiles/.emacs.d")
+(use-package helm-c-yasnippet
+  :config
+  (setq helm-yas-space-match-any-greedy t)
+  (yas-global-mode 1)
+  (yas-load-directory "~/dotfiles/.emacs.d")
+  :bind ("C-c s" . helm-yas-complete))
 
 ;;; smooth-scroll
-(use-package smooth-scroll)
-(smooth-scroll-mode t)
+(use-package smooth-scroll
+  :config (smooth-scroll-mode t))
 
 ;;Magit(git管理)
-(use-package magit)
-(global-set-key (kbd "C-c m") 'magit-status)
+(use-package magit
+  :bind
+  ("C-c m" . magit-status))
 
 ;;multiple-cursors(カーソルを複数に)
-(use-package multiple-cursors)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(use-package multiple-cursors
+  :bind
+  ("C->"       . mc/mark-next-like-this)
+  ("C-<"       . mc/mark-previous-like-this)
+  ("C-c C-<". mc/mark-all-like-this ))
 
 ;;company(補完機能)
 (package-initialize)
@@ -268,24 +271,26 @@
   '(add-hook 'flycheck-mode-hook #'flycheck-cask-setup))
 
 ;;undo-tree(C-x u)
-(use-package undo-tree)
-(global-undo-tree-mode)
-(global-set-key (kbd "C-c .") 'undo-tree-redo)
+(use-package undo-tree
+  :config (global-undo-tree-mode)
+  :bind ("C-c ." . undo-tree-redo))
 
 ;;helmの設定
-(use-package helm-config)
-(helm-mode 1)
-(semantic-mode 1)
-(global-set-key (kbd "C-c h") 'helm-for-files);;色々検索
-(global-set-key (kbd "C-c k") 'helm-show-kill-ring);;キルリング履歴
-(global-set-key (kbd "C-x C-f") 'helm-find-files);;ファイル検索
-;;(global-set-key (kbd "C-c j") 'helm-imenu);;関数や定義検索
-(global-set-key (kbd "C-c f") 'helm-occur);;文字列検索
-(global-set-key (kbd "C-c b") 'helm-google-suggest);;ブラウザ検索
-(global-set-key (kbd "C-x C-x") 'helm-mark-ring);;マークリング履歴
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action);;タブ補完
-(setq recentf-max-saved-items 100) ;; 最近のファイル100個を保存する
-(setq recentf-exclude '("/TAGS$" "/var/tmp/")) ;;最近のファイルに加えない
+(use-package helm-config
+  :config
+  (helm-mode 1)
+  (semantic-mode 1)
+  (setq recentf-max-saved-items 100) ;; 最近のファイル100個を保存する
+  (setq recentf-exclude '("/TAGS$" "/var/tmp/")) ;;最近のファイルに加えない
+  :bind
+  ("C-c h" . helm-for-files);;色々検索
+  ("C-c k" . helm-show-kill-ring);;キルリング履歴
+  ("C-x C-f" . helm-find-files);;ファイル検索
+  ("C-c f" . helm-occur);;文字列検索
+  ("C-c b" . helm-google-suggest);;ブラウザ検索
+  ("C-x C-x" . helm-mark-ring);;マークリング履歴
+  ("C-c j" . helm-imenu);;関数や定義検索
+  (:map define-key helm-map ("<tab>" . helm-execute-persistent-action)));;タブ補完
 
 ;;redo+(undo-treeで代用可)
 ;;(require 'redo+)
