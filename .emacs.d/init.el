@@ -154,7 +154,7 @@
 ;;閉じ括弧補完
 (electric-pair-mode t)
 (add-to-list 'electric-pair-pairs '(?{ . ?})) ;;{}
-(add-to-list 'electric-pair-pairs '(?< . ?>)) ;;<>
+;;(add-to-list 'electric-pair-pairs '(?< . ?>)) ;;<>
 
 ;;閉じ括弧補完のあといい感じで改行
 (electric-layout-mode t)
@@ -225,6 +225,25 @@
 
 (require 'use-package)
 
+;;markdown-mode
+;;テキストスタイル(C-c C-s i/b)
+;;リンク(C-c C-l)
+;;画像(C-c C-i)
+;;見出し#(C-c C-s 数字)
+;;html変換してフッファに(C-c C-c m)
+;;html変換して保存(C-c C-c e)
+;;mdファイル内のリンクへジャンプ(C-c C-o)
+;;* (M-RET)
+;;*の入れ替え(C-c up/down)
+;;コード(C-c C-s c)
+;;言語指定コード(C-c C-s C)
+(use-package markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+
 ;;yasnippet(スニペット登録)
 (use-package yasnippet)
 (use-package helm-c-yasnippet
@@ -270,10 +289,13 @@
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-cask-setup))
 
-;;undo-tree(C-x u)
+;;undo-tree
 (use-package undo-tree
   :config (global-undo-tree-mode)
-  :bind ("C-c ." . undo-tree-redo))
+  :bind
+  ("C-c ." . undo-tree-redo)
+  ("C-c u" . undo-tree-visualize)
+)
 
 ;;helmの設定
 (use-package helm-config
@@ -289,8 +311,8 @@
   ("C-c f" . helm-occur);;文字列検索
   ("C-c b" . helm-google-suggest);;ブラウザ検索
   ("C-x C-x" . helm-mark-ring);;マークリング履歴
-  ("C-c j" . helm-imenu);;関数や定義検索
-  (:map define-key helm-map ("<tab>" . helm-execute-persistent-action)));;タブ補完
+  ;;("C-c j" . helm-imenu);;関数や定義検索
+  (:map helm-find-files-map("C-h" . helm-execute-persistent-action)));;タブ補完
 
 ;;redo+(undo-treeで代用可)
 ;;(require 'redo+)

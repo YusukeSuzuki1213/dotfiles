@@ -16,3 +16,4 @@
 (depends-on "yasnippet")
 (depends-on "helm-c-yasnippet")
 (depends-on "use-package")
+(depends-on "markdown-mode")
