@@ -1,5 +1,6 @@
 # dotfiles
 This is a repository with my configuration files.
+
 ## Installation of dotfiles
 ```shell
 $ cd ~
@@ -10,15 +11,15 @@ $ install.sh
 
 ## Emacs
 ### Installation of Emacs
-If you haven't installed Emacs, plese install Emacs like the following.
+If you haven't installed Emacs, plese,install latest version of Emacs like the following.(The following is a example of installation.)
 ```shell
 sudo apt-add-repository -y ppa:adrozdoff/emacs
-sudo apt update
-sudo apt install emacs25
+sudo apt-get update
+sudo apt-get install emacs25
 ```
 
 ### Installation of Cask
-I use Cask to manage Emacs packages.
+I use Cask to manage Emacs packages. Please,install Cask.
 ```shell
 $ curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 ```
@@ -54,4 +55,4 @@ curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fishe
 ```
 
 ### Installation of fish plugins
-Plese,install plugins written on fishfile. You can install `$fisher plugin name`
+Plese,install plugins written on fishfile. You can install `$fisher "plugin name"`
