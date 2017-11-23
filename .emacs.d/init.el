@@ -3,6 +3,13 @@
 ;;------------------------------------------------------------------------------------------------------------------------------------------------
 
 ;;起動メッセージ非表示
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq inhibiwt-startup-message t)
 
 ;; ツールバーを非表示
@@ -225,6 +232,15 @@
 
 (require 'use-package)
 
+;;; ddskk
+(use-package skk-study
+  :config
+  (setq default-input-method "japanese-skk")
+  :bind
+  ("C-x C-j" . skk-mode)
+  ("C-x j" . skk-auto-fill-mode)
+  )
+
 ;;markdown-mode
 ;;テキストスタイル(C-c C-s i/b)
 ;;リンク(C-c C-l)
@@ -237,6 +253,7 @@
 ;;*の入れ替え(C-c up/down)
 ;;コード(C-c C-s c)
 ;;言語指定コード(C-c C-s C)
+;;プレビュー(C-c C-c p)
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
@@ -270,11 +287,13 @@
   ("C-c C-<". mc/mark-all-like-this ))
 
 ;;company(補完機能)
-(package-initialize)
-(global-company-mode) ; 全バッファで有効にする
-(setq company-idle-delay 0) ; デフォルトは0.5
-(setq company-minimum-prefix-length 2) ; デフォルトは4
-(setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+(use-package company
+  :init (global-company-mode) ; 全バッファで有効にする
+  :config
+  (setq company-idle-delay 0) ; デフォルトは0.5
+  (setq company-minimum-prefix-length 2) ; デフォルトは4
+  (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+)
 
 ;;dashboard(起動画面カスタマイズ)
 ;;CUI環境では崩れる可能性あり

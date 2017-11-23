@@ -17,3 +17,5 @@
 (depends-on "helm-c-yasnippet")
 (depends-on "use-package")
 (depends-on "markdown-mode")
+(depends-on "ddskk")
+
