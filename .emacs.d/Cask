@@ -18,4 +18,6 @@
 (depends-on "use-package")
 (depends-on "markdown-mode")
 (depends-on "ddskk")
-
+(depends-on "irony")
+(depends-on "company-irony")
+(depends-on "yatex")

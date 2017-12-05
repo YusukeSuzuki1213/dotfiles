@@ -230,9 +230,37 @@
 (require 'cask "~/.cask/cask.el")
 (cask-initialize)
 
+;;usepackage
 (require 'use-package)
 
-;;; ddskk
+;;yatex(tex環境)
+(use-package yatex
+  :ensure t
+  :mode (("\\.tex$" . yatex-mode))
+  :bind (("C-c C-t" . YaTeX-typeset-menu))
+  :config
+  ;; automatically selected according to current language
+  ;; (setq YaTeX-japan t)
+  ;; change default kanji-code from 2:JIS to 4:UTF-8
+   (setq latex-message-kanji-code 4)
+   (setq YaTeX-kanji-code 4)
+   (setq YaTeX-coding-system 4)
+  ;; variables are declared in yatexlib.el
+  (setq YaTeX-inhibit-prefix-letter t)
+  ;; local dictionary is NOT needed
+  (setq YaTeX-nervous nil) 
+  ;; variables are declared in yatex.el
+  (setq tex-command "ptex2pdf -l")
+  (setq bibtex-command "pbibtex")
+  (setq dvi2-command "open -a Preview")
+  (setq tex-pdfview-command "open -a Preview")
+  (setq dviprint-command-format "dvipdfmx %s")
+  (setq YaTeX-skip-default-reader t)
+  (setq YaTeX-simple-messages t)
+  ;; (setq YaTeX-template-file "...")
+  )
+
+;;; ddskk(日本語入力)
 (use-package skk-study
   :config
   (setq default-input-method "japanese-skk")
@@ -256,10 +284,12 @@
 ;;プレビュー(C-c C-c p)
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
+  :mode(
+        ("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+  :init (setq markdown-command "multimarkdown")
+  )
 
 ;;yasnippet(スニペット登録)
 (use-package yasnippet)
@@ -268,32 +298,54 @@
   (setq helm-yas-space-match-any-greedy t)
   (yas-global-mode 1)
   (yas-load-directory "~/dotfiles/.emacs.d")
-  :bind ("C-c s" . helm-yas-complete))
+  :bind ("C-c y" . helm-yas-complete)
+  )
 
 ;;; smooth-scroll
 (use-package smooth-scroll
-  :config (smooth-scroll-mode t))
+  :config (smooth-scroll-mode t)
+  )
 
 ;;Magit(git管理)
 (use-package magit
   :bind
-  ("C-c m" . magit-status))
+  ("C-c m" . magit-status)
+  )
 
 ;;multiple-cursors(カーソルを複数に)
 (use-package multiple-cursors
   :bind
   ("C->"       . mc/mark-next-like-this)
   ("C-<"       . mc/mark-previous-like-this)
-  ("C-c C-<". mc/mark-all-like-this ))
+  ("C-c C-<". mc/mark-all-like-this )
+  )
+
+;; (use-package irony
+;; :config
+;; (add-hook 'c-mode-hook 'irony-mode)
+;; (add-hook 'c++-mode-hook 'irony-mode)
+;; (add-hook 'objc-mode-hook 'irony-mode)
+;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;; ;(add-to-list 'company-backends 'company-irony) ; backend追加
+;; )
+
+
+;; (use-package company-irony
+;;   :after company irony
+;;   :config
+;;   (setq company-backends (remove 'company-clang company-backends))
+;;   (add-to-list 'company-backends 'company-irony)
+;;   )
+
 
 ;;company(補完機能)
 (use-package company
-  :init (global-company-mode) ; 全バッファで有効にする
   :config
+  (global-company-mode) ; 全バッファで有効にする
   (setq company-idle-delay 0) ; デフォルトは0.5
   (setq company-minimum-prefix-length 2) ; デフォルトは4
   (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
-)
+  )
 
 ;;dashboard(起動画面カスタマイズ)
 ;;CUI環境では崩れる可能性あり
@@ -306,7 +358,8 @@
 (use-package flycheck)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-cask-setup))
+  '(add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
+  )
 
 ;;undo-tree
 (use-package undo-tree
@@ -328,7 +381,7 @@
   ("C-c k" . helm-show-kill-ring);;キルリング履歴
   ("C-x C-f" . helm-find-files);;ファイル検索
   ("C-c f" . helm-occur);;文字列検索
-  ("C-c b" . helm-google-suggest);;ブラウザ検索
+  ;;("C-c b" . helm-google-suggest);;ブラウザ検索
   ("C-x C-x" . helm-mark-ring);;マークリング履歴
   ;;("C-c j" . helm-imenu);;関数や定義検索
   (:map helm-find-files-map("C-h" . helm-execute-persistent-action)));;タブ補完
