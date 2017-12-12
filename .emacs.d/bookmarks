@@ -1,6 +1,10 @@
 ;;;; Emacs Bookmark Format Version 1 ;;;;
 ;;; This format is meant to be slightly human-readable;
-;;; nevertheless, you probably don't want to edit it.
+;;; nevertheless, you prob(global-set-key
+ (kbd "<f8> <f6>")
+ (lambda ()
+   (interactive)
+   (find-file "~/todo.org")))ably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("init.el/パッケージ設定"
  (filename . "~/dotfiles/.emacs.d/init.el")

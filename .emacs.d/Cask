@@ -24,3 +24,4 @@
 (depends-on "org-plus-contrib")
 (depends-on "migemo")
 (depends-on "whitespace")
+(depends-on "restart-emacs")

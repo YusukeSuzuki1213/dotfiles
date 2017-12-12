@@ -12,6 +12,9 @@
 
 (setq inhibiwt-startup-message t)
 
+;;最大化してEmacs起動
+(set-frame-parameter nil 'fullscreen 'maximized)
+
 ;; ツールバーを非表示
 (tool-bar-mode -1)
 
@@ -50,6 +53,12 @@
 
 ; 簡単にウインドを切り変える
 (define-key global-map (kbd "C-o") 'other-window)
+
+;;Emacs再起動
+ (define-key global-map
+  (kbd "C-c 3") (kbd "C-u C-u C-u")
+  )
+;;(global-set-key (kbd "C-c R") (lambda() (interactive)(restart-emacs-)))
 
 ;;文字コードを設定する
 (set-language-environment "Japanese")
@@ -102,8 +111,8 @@
 ;  (turn-on-eldoc-mode)))
 
 ;;カラーテーマ
-;(load-theme 'tsdh-dark t)
-(load-theme 'deeper-blue t)
+(load-theme 'tsdh-dark t)
+;(load-theme 'deeper-blue t)
 ;(load-theme 'manoj-dark t)
 ;(load-theme 'misterioso t)
 ;(load-theme 'tango-dark t)
@@ -111,9 +120,9 @@
 ;(load-theme 'wombat t)
 
 
-;;------------------------------------------------------------------------------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------------------------------------------------
 ;;エディタ設定
-;;------------------------------------------------------------------------------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------------------------------------------------
 
 ;;指定行に移動
 (define-key global-map (kbd "C-c j") 'goto-line)
@@ -222,9 +231,9 @@
 ;    (message "match-paren-kill-ring-save: %d characters saved" c)))
 ;(global-set-key [C-f5] 'match-paren-kill-ring-save)
 
-;;------------------------------------------------------------------------------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------------------------------------------------
 ;;パッケージ設定
-;;------------------------------------------------------------------------------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------------------------------------------------
 
 ;;cask
 (require 'cask "~/.cask/cask.el")
@@ -300,8 +309,7 @@
   (global-whitespace-mode 1)
   (defvar my/bg-color "#232323")
   (set-face-attribute 'whitespace-trailing nil
-                      :background "DeepPink"
-                      )
+                      :background "DeepPink")
   (set-face-attribute 'whitespace-tab nil
                       :background my/bg-color
                       :foreground "LightSkyBlue"
@@ -324,7 +332,8 @@
   (setq migemo-user-dictionary nil)
   (setq migemo-regex-dictionary nil)
   (setq migemo-coding-system 'utf-8-unix)
-  (migemo-init))
+  (migemo-init)
+  )
 
 ;;; ddskk(日本語入力)
 (use-package skk-study
@@ -358,7 +367,11 @@
   )
 
 ;;yasnippet(スニペット登録)
-(use-package yasnippet)
+(use-package yasnippet
+  :bind("C-c Y" . yas-new-snippet)
+  )
+
+;;helm-c-yasnippet(helmでyasnippet仕様)
 (use-package helm-c-yasnippet
   :config
   (setq helm-yas-space-match-any-greedy t)
@@ -415,16 +428,18 @@
 
 ;;dashboard(起動画面カスタマイズ)
 ;;CUI環境では崩れる可能性あり
-(use-package dashboard)
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook)
+  )
 ;;(setq inhibit-startup-message t)
-(dashboard-setup-startup-hook)
 ;;(setq dashboard-items '((recents  . 5)))
 
 ;;flycheck(シンタックスチェック)
-(use-package flycheck)
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-cask-setup)
+(use-package flycheck
+  :config
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+  (eval-after-load 'flycheck'(add-hook 'flycheck-mode-hook #'flycheck-cask-setup))
   )
 
 ;;undo-tree
@@ -433,14 +448,18 @@
   :bind
   ("C-c /" . undo-tree-redo)
   ("C-c u" . undo-tree-visualize)
-)
+  )
+
+(use-package helm
+  :config
+  (helm-migemo-mode);;helm-find-filesのときはワンスペース必要
+  )
 
 ;;helmの設定
 (use-package helm-config
   :config
   (helm-mode 1)
   (semantic-mode 1)
-  (helm-migemo-mode 1)
   (setq recentf-max-saved-items 100) ;; 最近のファイル100個を保存する
   (setq recentf-exclude '("/TAGS$" "/var/tmp/")) ;;最近のファイルに加えない
   :bind
@@ -449,10 +468,11 @@
   ("C-c k" . helm-show-kill-ring);;キルリング履歴
   ("C-x C-f" . helm-find-files);;ファイル検索
   ("C-c f" . helm-occur);;文字列検索
-  ;;("C-c b" . helm-google-suggest);;ブラウザ検索
+  ("C-c G" . helm-google-suggest);;ブラウザ検索
   ("C-x C-x" . helm-mark-ring);;マークリング履歴
   ;;("C-c j" . helm-imenu);;関数や定義検索
-  (:map helm-find-files-map("C-h" . helm-execute-persistent-action)));;タブ補完
+  (:map helm-find-files-map("C-h" . helm-execute-persistent-action));;タブ補完
+  )
 
 ;;redo+(undo-treeで代用可)
 ;;(require 'redo+)
