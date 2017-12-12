@@ -25,3 +25,4 @@
 (depends-on "migemo")
 (depends-on "whitespace")
 (depends-on "restart-emacs")
+(depends-on "mozc")

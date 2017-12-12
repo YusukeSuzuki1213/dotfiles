@@ -124,6 +124,14 @@
 ;;エディタ設定
 ;;-----------------------------------------------------------------------------------------------------------------------
 
+
+;;日本語切り替え
+(global-set-key (kbd "C-<muhenkan>") 'toggle-input-method)
+(add-hook 'mozc-mode-hook
+  (lambda()
+    (define-key mozc-mode-map (kbd "C-<muhenkan>") 'toggle-input-method)))
+
+
 ;;指定行に移動
 (define-key global-map (kbd "C-c j") 'goto-line)
 
@@ -297,6 +305,16 @@
 ;;   (setq YaTeX-simple-messages t)
 ;;   ;; (setq YaTeX-template-file "...")
 ;;   )
+
+;;mozc(もずく)(日本語入力の予測変換など)
+(require 'mozc)
+(set-language-environment "Japanese")
+(setq default-input-method "japanese-mozc")
+(setq mozc-candidate-style 'overlay)
+  (set-face-attribute 'mozc-cand-overlay-even-face 'nil
+                      :background "OliveDrab1" :foreground "black")
+  (set-face-attribute 'mozc-cand-overlay-odd-face 'nil
+                      :background "OliveDrab1" :foreground "black")
 
 ;;whitespace(空白可視化)
 (use-package whitespace
