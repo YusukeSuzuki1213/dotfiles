@@ -1,6 +1,6 @@
-;;------------------------------------------------------------------------------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------------------------------------------------
 ;;基本設定
-;;------------------------------------------------------------------------------------------------------------------------------------------------
+;;-----------------------------------------------------------------------------------------------------------------------
 
 ;;起動メッセージ非表示
 
@@ -31,17 +31,17 @@
 
 ;;起動時に3画面分割してshellを配置
 ;;(defun split-window-and-run-shell()
-;;	(setq w (selected-window))
-;;	(setq w3 (split-window w -4 nil))
-;;	(select-window w3)
-;;	(shell)
-;;	(setq w2 (split-window w nil t))
-;;	(select-window w))
+;;     (setq w (selected-window))
+;;    (setq w3 (split-window w -4 nil))
+;;    (select-window w3)
+;;    (shell)
+;;    (setq w2 (split-window w nil t))
+;;    (select-window w))
 ;;(add-hook 'after-init-hook (lambda()(split-;window-and-run-shell)))
 
 ;; フォント
 (custom-set-faces
- '(default ((t (:foundry "Source Code Pro" :family "Source Code Pro")))))
+ '(default ((t (:foundry "Source Code Pro" :family "Source Code Pro":height 135)))))
 ;; Japanese font
 (set-fontset-font t 'japanese-jisx0208 (font-spec :family "IPAExGothic"))
 
@@ -61,9 +61,9 @@
 
 ;;バックアップとオートセーブファイルを~/.emacs.d/backups/へ集める
 ;(add-to-list 'backup-directory-alist
-;			 (cons "." "~/.emacs.d/backups/"))
+;             (cons "." "~/.emacs.d/backups/"))
 ;(setq auto-save-file-name-transforms
-;	  `((".*" ,(expand-file-name "~/.emacs.d/backups/") t)))
+;      `((".*" ,(expand-file-name "~/.emacs.d/backups/") t)))
 
 ;;オートセーブファイル(.saves-0000-user name)を作らない
 (setq auto-save-list-file-prefix nil)
@@ -126,7 +126,7 @@
 (global-hl-line-mode t)
 
 ;; 対応する括弧をハイライト
-(show-paren-mode t)                       
+(show-paren-mode t)
 (setq show-paren-style 'mixed)
 
 ;; タブにスペースを使用する
@@ -153,7 +153,7 @@
     (save-excursion
       (forward-line )
       (transpose-lines -1))
-	    (forward-line -1 )
+        (forward-line -1 )
     (move-to-column col)))
 (global-set-key (kbd "M-P") 'move-line-up)
 (global-set-key (kbd "M-N") 'move-line-down)
@@ -176,28 +176,28 @@
   (interactive "p")
   (or arg (setq arg 1))
   (if (and (> arg 0) (eobp) (save-excursion (forward-visible-line 0) (eobp)))
-	  (signal 'end-of-buffer nil))
+      (signal 'end-of-buffer nil))
   (if (and (< arg 0) (bobp) (save-excursion (end-of-visible-line) (bobp)))
-	  (signal 'beginning-of-buffer nil))
+      (signal 'beginning-of-buffer nil))
   (unless (eq last-command 'copy-region-as-kill)
-	(kill-new "")
-	(setq last-command 'copy-region-as-kill))
+    (kill-new "")
+    (setq last-command 'copy-region-as-kill))
   (cond ((zerop arg)
-		 (save-excursion
-		   (copy-region-as-kill (point) (progn (forward-visible-line 0) (point)))
-		   (copy-region-as-kill (point) (progn (end-of-visible-line) (point)))))
-		((< arg 0)
-		 (save-excursion
-		   (copy-region-as-kill (point) (progn (end-of-visible-line) (point)))
-		   (copy-region-as-kill (point)
-								(progn (forward-visible-line (1+ arg))
-									   (unless (bobp) (backward-char))
-									   (point)))))
-		(t
-		 (save-excursion
-		   (copy-region-as-kill (point) (progn (forward-visible-line 0) (point)))
-		   (copy-region-as-kill (point)
-								(progn (forward-visible-line arg) (point))))))
+         (save-excursion
+           (copy-region-as-kill (point) (progn (forward-visible-line 0) (point)))
+           (copy-region-as-kill (point) (progn (end-of-visible-line) (point)))))
+        ((< arg 0)
+         (save-excursion
+           (copy-region-as-kill (point) (progn (end-of-visible-line) (point)))
+           (copy-region-as-kill (point)
+                                (progn (forward-visible-line (1+ arg))
+                                       (unless (bobp) (backward-char))
+                                       (point)))))
+        (t
+         (save-excursion
+           (copy-region-as-kill (point) (progn (forward-visible-line 0) (point)))
+           (copy-region-as-kill (point)
+                                (progn (forward-visible-line arg) (point))))))
     (message (substring (car kill-ring-yank-pointer) 0 -1)))
 
 ;; 対応するカッコにジャンプ
@@ -205,8 +205,8 @@
 ;  "Go to the matching parenthesis."
 ;  (interactive "p")
 ; (cond ((looking-at "[([{（｛［「『《〔【〈]") (forward-sexp 1) (backward-char))
-;		((looking-at "[])}）｛］」』》〕】〉]") (forward-char) (backward-sexp 1))
-;		(t (message "match-paren-japanese ignored"))))
+;        ((looking-at "[])}）｛］」』》〕】〉]") (forward-char) (backward-sexp 1))
+;        (t (message "match-paren-japanese ignored"))))
 ;(global-set-key [f5] 'match-paren-japanese)
 
 ;; 対応するカッコまでをコピー
@@ -219,7 +219,7 @@
 ;  (exchange-point-and-mark)
 ;  (clipboard-kill-ring-save (mark) (point))
 ;  (let ((c (abs (- (mark) (point)))))
-;	(message "match-paren-kill-ring-save: %d characters saved" c)))
+;    (message "match-paren-kill-ring-save: %d characters saved" c)))
 ;(global-set-key [C-f5] 'match-paren-kill-ring-save)
 
 ;;------------------------------------------------------------------------------------------------------------------------------------------------
@@ -233,32 +233,98 @@
 ;;usepackage
 (require 'use-package)
 
+;;org-mode(メモ)
+;;M-RET 見出し
+;;M-right/left 見出しの*の数
+;;C-c C-l リンク作成
+;; (setq org-startup-with-inline-images t)
+;; (global-set-key (kbd "C-c 1 ") 'org-capture)
+;; (global-set-key (kbd "C-c 2") 'org-agenda)
+;; ;; org-captureで2種類のメモを扱うようにする
+;; (setq org-capture-templates
+;;       '(("t" "New TODO" entry
+;;          (file+headline "~/.emacs.d/org/todo.org" "予定")
+;;          "* TODO %?\n\n")
+;;         ("m" "Memo" entry
+;;          (file+headline "~/.emacs.d/org/memo.org" "メモ")
+;;          "* %U%?\n%i\n%a")))
+;; ;; org-agendaでaを押したら予定表とTODOリストを表示
+;; (setq org-agenda-custom-commands
+;;       '(("a" "Agenda and TODO"
+;;          ((agenda "")
+;;           (alltodo "")))))
+;; ;; org-agendaで扱うファイルは複数可だが、
+;; ;; TODO・予定用のファイルのみ指定
+;; (setq org-agenda-files '("~.emacs.d/org/todo.org"))
+;; ;; TODOリストに日付つきTODOを表示しない
+;; (setq org-agenda-todo-ignore-with-date t)
+;; ;; 今日から予定を表示させる
+;; (setq org-agenda-start-on-weekday nil)
+
+
 ;;yatex(tex環境)
-(use-package yatex
-  :ensure t
-  :mode (("\\.tex$" . yatex-mode))
-  :bind (("C-c C-t" . YaTeX-typeset-menu))
+;; (use-package yatex
+;;   :ensure t
+;;   :mode (("\\.tex$" . yatex-mode))
+;;   :bind (("C-c C-t" . YaTeX-typeset-menu))
+;;   :config
+;;   ;; automatically selected according to current language
+;;   ;; (setq YaTeX-japan t)
+;;   ;; change default kanji-code from 2:JIS to 4:UTF-8
+;;    (setq latex-message-kanji-code 4)
+;;    (setq YaTeX-kanji-code 4)
+;;    (setq YaTeX-coding-system 4)
+;;   ;; variables are declared in yatexlib.el
+;;   (setq YaTeX-inhibit-prefix-letter t)
+;;   ;; local dictionary is NOT needed
+;;   (setq YaTeX-nervous nil)
+;;   ;; variables are declared in yatex.el
+;;   (setq tex-command "ptex2pdf -l")
+;;   (setq bibtex-command "pbibtex")
+;;   (setq dvi2-command "open -a Preview")
+;;   (setq tex-pdfview-command "open -a Preview")
+;;   (setq dviprint-command-format "dvipdfmx %s")
+;;   (setq YaTeX-skip-default-reader t)
+;;   (setq YaTeX-simple-messages t)
+;;   ;; (setq YaTeX-template-file "...")
+;;   )
+
+;;whitespace(空白可視化)
+(use-package whitespace
   :config
-  ;; automatically selected according to current language
-  ;; (setq YaTeX-japan t)
-  ;; change default kanji-code from 2:JIS to 4:UTF-8
-   (setq latex-message-kanji-code 4)
-   (setq YaTeX-kanji-code 4)
-   (setq YaTeX-coding-system 4)
-  ;; variables are declared in yatexlib.el
-  (setq YaTeX-inhibit-prefix-letter t)
-  ;; local dictionary is NOT needed
-  (setq YaTeX-nervous nil) 
-  ;; variables are declared in yatex.el
-  (setq tex-command "ptex2pdf -l")
-  (setq bibtex-command "pbibtex")
-  (setq dvi2-command "open -a Preview")
-  (setq tex-pdfview-command "open -a Preview")
-  (setq dviprint-command-format "dvipdfmx %s")
-  (setq YaTeX-skip-default-reader t)
-  (setq YaTeX-simple-messages t)
-  ;; (setq YaTeX-template-file "...")
+  (setq whitespace-style '(face trailing tabs spaces empty space-mark tab-mark))
+  (setq whitespace-display-mappings
+        '((space-mark ?\u3000 [?\u25a1])
+          (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
+  (setq whitespace-space-regexp "\\(\u3000+\\)");;全角のみ可視化
+  (global-whitespace-mode 1)
+  (defvar my/bg-color "#232323")
+  (set-face-attribute 'whitespace-trailing nil
+                      :background "DeepPink"
+                      )
+  (set-face-attribute 'whitespace-tab nil
+                      :background my/bg-color
+                      :foreground "LightSkyBlue"
+                      :underline t)
+  (set-face-attribute 'whitespace-space nil
+                      :background my/bg-color
+                      :foreground "GreenYellow"
+                      :weight 'bold)
+  (set-face-attribute 'whitespace-empty nil
+                      :background my/bg-color)
   )
+
+;;migemo(日本語をローマ字検索)
+;;環境にcmigemoをインストールする必要あり
+(use-package migemo
+  :config
+  (setq migemo-command "cmigemo")
+  (setq migemo-options '("-q" "--emacs" "-i" "\a"))
+  (setq migemo-dictionary (expand-file-name "~/.emacs.d/dict/migemo/migemo-dict"))
+  (setq migemo-user-dictionary nil)
+  (setq migemo-regex-dictionary nil)
+  (setq migemo-coding-system 'utf-8-unix)
+  (migemo-init))
 
 ;;; ddskk(日本語入力)
 (use-package skk-study
@@ -351,7 +417,7 @@
 ;;CUI環境では崩れる可能性あり
 (use-package dashboard)
 ;;(setq inhibit-startup-message t)
-(dashboard-setup-startup-hook)			
+(dashboard-setup-startup-hook)
 ;;(setq dashboard-items '((recents  . 5)))
 
 ;;flycheck(シンタックスチェック)
@@ -365,7 +431,7 @@
 (use-package undo-tree
   :config (global-undo-tree-mode)
   :bind
-  ("C-c ." . undo-tree-redo)
+  ("C-c /" . undo-tree-redo)
   ("C-c u" . undo-tree-visualize)
 )
 
@@ -374,9 +440,11 @@
   :config
   (helm-mode 1)
   (semantic-mode 1)
+  (helm-migemo-mode 1)
   (setq recentf-max-saved-items 100) ;; 最近のファイル100個を保存する
   (setq recentf-exclude '("/TAGS$" "/var/tmp/")) ;;最近のファイルに加えない
   :bind
+  ("M-x" . helm-M-x);;M-xをhelm仕様に
   ("C-c h" . helm-for-files);;色々検索
   ("C-c k" . helm-show-kill-ring);;キルリング履歴
   ("C-x C-f" . helm-find-files);;ファイル検索
@@ -393,11 +461,11 @@
 ;;package.elの設定(caskで代用可)
 ;;(when (require 'package nil t)
 ;;  (add-to-list 'package-archives
-;;			   '("marmalade" . "http://marmalade-repo.org/packages/"))
+;;               '("marmalade" . "http://marmalade-repo.org/packages/"))
 ;;  (add-to-list 'package-archives
-;;			   '("ELPA" . "http://tromey.com/elpa/"))
+;;               '("ELPA" . "http://tromey.com/elpa/"))
 ;;  (add-to-list 'package-archives
-;;			 '("melpa" . "https://melpa.org/packages/")))
+;;             '("melpa" . "https://melpa.org/packages/")))
 
 
 ;;;;Elisp配置用のディレクトリを作成

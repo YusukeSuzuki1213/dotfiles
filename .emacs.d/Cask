@@ -1,7 +1,7 @@
 (source gnu)
 (source melpa)
 (source marmalade)
-
+(source org)
 
 (depends-on "cask")
 (depends-on "flycheck-cask")
@@ -21,3 +21,6 @@
 (depends-on "irony")
 (depends-on "company-irony")
 (depends-on "yatex")
+(depends-on "org-plus-contrib")
+(depends-on "migemo")
+(depends-on "whitespace")

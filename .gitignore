@@ -4,3 +4,6 @@
 /.emacd.d/bookmarks
 /.emacd.d/eshell/
 /.emacd.d/custom.el
+/.emacs.d/eshell/
+/.emacs.d/dict/
+/.emacs.d/org/
