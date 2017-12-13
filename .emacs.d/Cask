@@ -26,3 +26,5 @@
 (depends-on "whitespace")
 (depends-on "restart-emacs")
 (depends-on "mozc")
+(depends-on "company-jedi")
+(depends-on "jedi-core")

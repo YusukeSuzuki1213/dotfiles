@@ -56,14 +56,18 @@
 
 ;;Emacs再起動
  (define-key global-map
-  (kbd "C-c 3") (kbd "C-u C-u C-u")
-  )
+   (kbd "C-c R") 'restart-emacs)
+
 ;;(global-set-key (kbd "C-c R") (lambda() (interactive)(restart-emacs-)))
 
 ;;文字コードを設定する
 (set-language-environment "Japanese")
 (prefer-coding-system 'utf-8)
-
+(set-file-name-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(setq coding-system-for-read 'utf-8)
+(setq coding-system-for-write 'utf-8)
 ;; バックアップファイル(hoge.txt~)を作らない
 (setq backup-inhibited t)
 (setq make-backup-files nil)
@@ -111,8 +115,8 @@
 ;  (turn-on-eldoc-mode)))
 
 ;;カラーテーマ
-(load-theme 'tsdh-dark t)
-;(load-theme 'deeper-blue t)
+;(load-theme 'tsdh-dark t)
+(load-theme 'deeper-blue t)
 ;(load-theme 'manoj-dark t)
 ;(load-theme 'misterioso t)
 ;(load-theme 'tango-dark t)
@@ -130,6 +134,12 @@
 (add-hook 'mozc-mode-hook
   (lambda()
     (define-key mozc-mode-map (kbd "C-<muhenkan>") 'toggle-input-method)))
+
+;;カーソルの色を入力モードモードごとに変える
+(add-hook 'input-method-activate-hook
+          (lambda() (set-cursor-color "red")))
+(add-hook 'input-method-inactivate-hook
+          (lambda() (set-cursor-color "green")))
 
 
 ;;指定行に移動
@@ -185,37 +195,35 @@
 (add-to-list 'electric-layout-rules '(?{ . after) )
 
 ;;行のどの位置からでも行切り取り
-(global-set-key (kbd "C-c x") (lambda () (interactive) (beginning-of-line) (kill-line)))
+(global-set-key (kbd "C-c K") (lambda ()
+                                (interactive)
+                                (move-beginning-of-line 1)
+                                (kill-line)
+                                (backward-delete-char-untabify 1 nil)
+                                (message "%s   を切り取りました。"(substring (car kill-ring-yank-pointer) 0 nil))
+                                )
+                )
 
 ;;行のどの位置からでも行コピー
-(global-set-key (kbd "C-c c") 'copy-whole-line)
-(defun copy-whole-line (&optional arg)
-  (interactive "p")
-  (or arg (setq arg 1))
-  (if (and (> arg 0) (eobp) (save-excursion (forward-visible-line 0) (eobp)))
-      (signal 'end-of-buffer nil))
-  (if (and (< arg 0) (bobp) (save-excursion (end-of-visible-line) (bobp)))
-      (signal 'beginning-of-buffer nil))
-  (unless (eq last-command 'copy-region-as-kill)
-    (kill-new "")
-    (setq last-command 'copy-region-as-kill))
-  (cond ((zerop arg)
-         (save-excursion
-           (copy-region-as-kill (point) (progn (forward-visible-line 0) (point)))
-           (copy-region-as-kill (point) (progn (end-of-visible-line) (point)))))
-        ((< arg 0)
-         (save-excursion
-           (copy-region-as-kill (point) (progn (end-of-visible-line) (point)))
-           (copy-region-as-kill (point)
-                                (progn (forward-visible-line (1+ arg))
-                                       (unless (bobp) (backward-char))
-                                       (point)))))
-        (t
-         (save-excursion
-           (copy-region-as-kill (point) (progn (forward-visible-line 0) (point)))
-           (copy-region-as-kill (point)
-                                (progn (forward-visible-line arg) (point))))))
-    (message (substring (car kill-ring-yank-pointer) 0 -1)))
+(global-set-key (kbd "C-c c") (lambda()
+                                (interactive)
+                                (move-beginning-of-line 1)
+                                (kill-line)
+                                (yank)
+                                (message "%s   をコピーしました。"(substring (car kill-ring-yank-pointer) 0 nil))
+                                (move-beginning-of-line 1)
+                                )
+                )
+
+;;切り取ったあと行頭だったらバックスペース
+(global-set-key (kbd "C-k") (lambda()
+                              (interactive)
+                              (kill-line)
+                              (if (bolp)
+                                  (backward-delete-char-untabify 1 nil)
+                                )
+                              )
+                )
 
 ;; 対応するカッコにジャンプ
 ;(defun match-paren-japanese (arg)
@@ -307,14 +315,16 @@
 ;;   )
 
 ;;mozc(もずく)(日本語入力の予測変換など)
-(require 'mozc)
-(set-language-environment "Japanese")
-(setq default-input-method "japanese-mozc")
-(setq mozc-candidate-style 'overlay)
+(use-package mozc
+  :config
+  (set-language-environment "Japanese")
+  (setq default-input-method "japanese-mozc")
+  (setq mozc-candidate-style 'overlay)
   (set-face-attribute 'mozc-cand-overlay-even-face 'nil
                       :background "OliveDrab1" :foreground "black")
   (set-face-attribute 'mozc-cand-overlay-odd-face 'nil
                       :background "OliveDrab1" :foreground "black")
+  )
 
 ;;whitespace(空白可視化)
 (use-package whitespace
@@ -394,7 +404,7 @@
   :config
   (setq helm-yas-space-match-any-greedy t)
   (yas-global-mode 1)
-  (yas-load-directory "~/dotfiles/.emacs.d")
+  (yas-load-directory "~/.emacs.d")
   :bind ("C-c y" . helm-yas-complete)
   )
 
@@ -435,14 +445,37 @@
 ;;   )
 
 
+
 ;;company(補完機能)
 (use-package company
   :config
   (global-company-mode) ; 全バッファで有効にする
   (setq company-idle-delay 0) ; デフォルトは0.5
-  (setq company-minimum-prefix-length 2) ; デフォルトは4
-  (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
+  (setq company-minimum-prefix-length 2)
+  (setq company-selection-wrap-around t)
+  (set-face-attribute 'company-tooltip nil
+                      :foreground "black" :background "OliveDrab1")
+  (set-face-attribute 'company-tooltip-common nil
+                      :foreground "black" :background "OliveDrab1")
+  (set-face-attribute 'company-tooltip-common-selection nil
+                      :foreground "white" :background "OliveDrab4")
+  (set-face-attribute 'company-tooltip-selection nil
+                      :foreground "black" :background "OliveDrab4")
+  (set-face-attribute 'company-preview-common nil
+                      :background nil :foreground "OliveDrab4" :underline t)
+  (set-face-attribute 'company-scrollbar-fg nil
+                      :background "orange")
+  (set-face-attribute 'company-scrollbar-bg nil
+                      :background "OliveDrab4")
   )
+
+(use-package jedi-core
+  :config
+  (setq jedi:complete-on-dot t)
+  (setq jedi:use-shortcuts t)
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (add-to-list 'company-backends 'company-jedi)
+)
 
 ;;dashboard(起動画面カスタマイズ)
 ;;CUI環境では崩れる可能性あり
@@ -468,10 +501,12 @@
   ("C-c u" . undo-tree-visualize)
   )
 
+
 (use-package helm
   :config
   (helm-migemo-mode);;helm-find-filesのときはワンスペース必要
   )
+
 
 ;;helmの設定
 (use-package helm-config
@@ -480,7 +515,7 @@
   (semantic-mode 1)
   (setq recentf-max-saved-items 100) ;; 最近のファイル100個を保存する
   (setq recentf-exclude '("/TAGS$" "/var/tmp/")) ;;最近のファイルに加えない
-  :bind
+  :bind(
   ("M-x" . helm-M-x);;M-xをhelm仕様に
   ("C-c h" . helm-for-files);;色々検索
   ("C-c k" . helm-show-kill-ring);;キルリング履歴
@@ -489,7 +524,10 @@
   ("C-c G" . helm-google-suggest);;ブラウザ検索
   ("C-x C-x" . helm-mark-ring);;マークリング履歴
   ;;("C-c j" . helm-imenu);;関数や定義検索
-  (:map helm-find-files-map("C-h" . helm-execute-persistent-action));;タブ補完
+  :map helm-map
+     ("<tab>" . helm-execute-persistent-action)
+     ("C-z" . helm-select-action)
+     )
   )
 
 ;;redo+(undo-treeで代用可)
