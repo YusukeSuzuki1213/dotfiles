@@ -68,6 +68,7 @@
 (set-terminal-coding-system 'utf-8)
 (setq coding-system-for-read 'utf-8)
 (setq coding-system-for-write 'utf-8)
+
 ;; バックアップファイル(hoge.txt~)を作らない
 (setq backup-inhibited t)
 (setq make-backup-files nil)
@@ -141,7 +142,6 @@
 (add-hook 'input-method-inactivate-hook
           (lambda() (set-cursor-color "green")))
 
-
 ;;指定行に移動
 (define-key global-map (kbd "C-c j") 'goto-line)
 
@@ -195,34 +195,37 @@
 (add-to-list 'electric-layout-rules '(?{ . after) )
 
 ;;行のどの位置からでも行切り取り
-(global-set-key (kbd "C-c K") (lambda ()
-                                (interactive)
-                                (move-beginning-of-line 1)
-                                (kill-line)
-                                (backward-delete-char-untabify 1 nil)
-                                (message "%s   を切り取りました。"(substring (car kill-ring-yank-pointer) 0 nil))
-                                )
+(global-set-key (kbd "C-c K")
+                (lambda ()
+                  (interactive)
+                  (move-beginning-of-line 1)
+                  (kill-line)
+                  (backward-delete-char-untabify 1 nil)
+                  (message "%s  を切り取りました。"(substring (car kill-ring-yank-pointer) 0 nil))
+                  )
                 )
 
 ;;行のどの位置からでも行コピー
-(global-set-key (kbd "C-c c") (lambda()
-                                (interactive)
-                                (move-beginning-of-line 1)
-                                (kill-line)
-                                (yank)
-                                (message "%s   をコピーしました。"(substring (car kill-ring-yank-pointer) 0 nil))
-                                (move-beginning-of-line 1)
-                                )
+(global-set-key (kbd "C-c c")
+                (lambda()
+                  (interactive)
+                  (move-beginning-of-line 1)
+                  (kill-line)
+                  (yank)
+                  (message "%s  をコピーしました。"(substring (car kill-ring-yank-pointer) 0 nil))
+                  (move-beginning-of-line 1)
+                  )
                 )
 
 ;;切り取ったあと行頭だったらバックスペース
-(global-set-key (kbd "C-k") (lambda()
-                              (interactive)
-                              (kill-line)
-                              (if (bolp)
-                                  (backward-delete-char-untabify 1 nil)
-                                )
-                              )
+(global-set-key (kbd "C-k")
+                (lambda()
+                  (interactive)
+                  (kill-line)
+                  (if (bolp)
+                      (backward-delete-char-untabify 1 nil)
+                    )
+                  )
                 )
 
 ;; 対応するカッコにジャンプ
@@ -285,7 +288,6 @@
 ;; (setq org-agenda-todo-ignore-with-date t)
 ;; ;; 今日から予定を表示させる
 ;; (setq org-agenda-start-on-weekday nil)
-
 
 ;;yatex(tex環境)
 ;; (use-package yatex
@@ -399,7 +401,7 @@
   :bind("C-c Y" . yas-new-snippet)
   )
 
-;;helm-c-yasnippet(helmでyasnippet仕様)
+;;helm-c-yasnippet(helmでyasnippet使用)
 (use-package helm-c-yasnippet
   :config
   (setq helm-yas-space-match-any-greedy t)
@@ -436,15 +438,12 @@
 ;; ;(add-to-list 'company-backends 'company-irony) ; backend追加
 ;; )
 
-
 ;; (use-package company-irony
 ;;   :after company irony
 ;;   :config
 ;;   (setq company-backends (remove 'company-clang company-backends))
 ;;   (add-to-list 'company-backends 'company-irony)
 ;;   )
-
-
 
 ;;company(補完機能)
 (use-package company
@@ -475,7 +474,7 @@
   (setq jedi:use-shortcuts t)
   (add-hook 'python-mode-hook 'jedi:setup)
   (add-to-list 'company-backends 'company-jedi)
-)
+  )
 
 ;;dashboard(起動画面カスタマイズ)
 ;;CUI環境では崩れる可能性あり
@@ -483,8 +482,6 @@
   :config
   (dashboard-setup-startup-hook)
   )
-;;(setq inhibit-startup-message t)
-;;(setq dashboard-items '((recents  . 5)))
 
 ;;flycheck(シンタックスチェック)
 (use-package flycheck
@@ -501,14 +498,11 @@
   ("C-c u" . undo-tree-visualize)
   )
 
-
+;;helmの設定
 (use-package helm
   :config
   (helm-migemo-mode);;helm-find-filesのときはワンスペース必要
   )
-
-
-;;helmの設定
 (use-package helm-config
   :config
   (helm-mode 1)
@@ -533,7 +527,8 @@
 ;;redo+(undo-treeで代用可)
 ;;(require 'redo+)
 ;;(global-set-key(kbd "C-c .") 'redo)
-;;
+
+
 ;;package.elの設定(caskで代用可)
 ;;(when (require 'package nil t)
 ;;  (add-to-list 'package-archives
@@ -542,7 +537,6 @@
 ;;               '("ELPA" . "http://tromey.com/elpa/"))
 ;;  (add-to-list 'package-archives
 ;;             '("melpa" . "https://melpa.org/packages/")))
-
 
 ;;;;Elisp配置用のディレクトリを作成
 ;;(when (< emacs-major-version 23)
