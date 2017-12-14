@@ -116,13 +116,15 @@
 ;  (turn-on-eldoc-mode)))
 
 ;;カラーテーマ
-;(load-theme 'tsdh-dark t)
-(load-theme 'deeper-blue t)
-;(load-theme 'manoj-dark t)
-;(load-theme 'misterioso t)
-;(load-theme 'tango-dark t)
-;(load-theme 'wheatgrass t)
-;(load-theme 'wombat t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t);;caskでDLしてるのでロードパス確認
+;;(load-theme 'tsdh-dark t)
+;;(load-theme 'deeper-blue t)
+;;(load-theme 'manoj-dark t)
+;;(load-theme 'misterioso t)
+;;(load-theme 'tango-dark t)
+;;(load-theme 'wheatgrass t)
+;;(load-theme 'wombat t)
 
 
 ;;-----------------------------------------------------------------------------------------------------------------------
@@ -214,6 +216,7 @@
                   (yank)
                   (message "%s  をコピーしました。"(substring (car kill-ring-yank-pointer) 0 nil))
                   (move-beginning-of-line 1)
+                  (forward-line 1)
                   )
                 )
 
@@ -316,6 +319,44 @@
 ;;   ;; (setq YaTeX-template-file "...")
 ;;   )
 
+;;rainbow-mode(カラーコードなどのの色を表示)
+(use-package rainbow-mode
+  :config
+  (setq rainbow-html-colors t)
+  (setq rainbow-x-colors t)
+  (setq rainbow-latex-colors t)
+  (setq rainbow-ansi-colors t)
+  (add-hook 'prog-mode-hook 'rainbow-mode)
+  )
+
+;;rainbow-delimiters(()の色を変える)
+(use-package rainbow-delimiters
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+  (set-face-attribute 'rainbow-delimiters-depth-2-face nil
+                      :foreground "#ffaf87")
+  (set-face-attribute 'rainbow-delimiters-depth-3-face nil
+                      :foreground "#fff487")
+  (set-face-attribute 'rainbow-delimiters-depth-4-face nil
+                      :foreground "#adffa8")
+  (set-face-attribute 'rainbow-delimiters-depth-5-face nil
+                      :foreground "#89fcff")
+  (set-face-attribute 'rainbow-delimiters-depth-6-face nil
+                      :foreground "#999eff")
+  (set-face-attribute 'rainbow-delimiters-depth-7-face nil
+                      :foreground "#ffaaf9")
+  )
+
+;;ace-jump-mode(画面内のカーソル移動)
+(use-package ace-jump-mode
+  :config
+  (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+  (set-face-attribute 'ace-jump-face-background nil
+                      :background "#3c3d3e" :foreground "honeydew");;backはzenburn用
+  (set-face-attribute 'ace-jump-face-foreground nil
+                      :background "Red" :foreground "yellow")
+  )
+
 ;;mozc(もずく)(日本語入力の予測変換など)
 (use-package mozc
   :config
@@ -323,21 +364,21 @@
   (setq default-input-method "japanese-mozc")
   (setq mozc-candidate-style 'overlay)
   (set-face-attribute 'mozc-cand-overlay-even-face 'nil
-                      :background "OliveDrab1" :foreground "black")
+                      :background "OliveDrab2" :foreground "black")
   (set-face-attribute 'mozc-cand-overlay-odd-face 'nil
-                      :background "OliveDrab1" :foreground "black")
+                      :background "OliveDrab2" :foreground "black")
   )
 
 ;;whitespace(空白可視化)
 (use-package whitespace
   :config
-  (setq whitespace-style '(face trailing tabs spaces empty space-mark tab-mark))
+  (setq whitespace-style '(face  tabs spaces empty space-mark tab-mark))
   (setq whitespace-display-mappings
         '((space-mark ?\u3000 [?\u25a1])
           (tab-mark ?\t [?\u00BB ?\t] [?\\ ?\t])))
   (setq whitespace-space-regexp "\\(\u3000+\\)");;全角のみ可視化
   (global-whitespace-mode 1)
-  (defvar my/bg-color "#232323")
+  (defvar my/bg-color "#3c3d3e")
   (set-face-attribute 'whitespace-trailing nil
                       :background "DeepPink")
   (set-face-attribute 'whitespace-tab nil
@@ -429,21 +470,6 @@
   ("C-c C-<". mc/mark-all-like-this )
   )
 
-;; (use-package irony
-;; :config
-;; (add-hook 'c-mode-hook 'irony-mode)
-;; (add-hook 'c++-mode-hook 'irony-mode)
-;; (add-hook 'objc-mode-hook 'irony-mode)
-;; (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-;; ;(add-to-list 'company-backends 'company-irony) ; backend追加
-;; )
-
-;; (use-package company-irony
-;;   :after company irony
-;;   :config
-;;   (setq company-backends (remove 'company-clang company-backends))
-;;   (add-to-list 'company-backends 'company-irony)
-;;   )
 
 ;;company(補完機能)
 (use-package company
@@ -452,10 +478,13 @@
   (setq company-idle-delay 0) ; デフォルトは0.5
   (setq company-minimum-prefix-length 2)
   (setq company-selection-wrap-around t)
+  (add-hook 'go-mode-hook (lambda ()
+                          (set (make-local-variable 'company-backends) '(company-go))
+                          (company-mode)))
   (set-face-attribute 'company-tooltip nil
-                      :foreground "black" :background "OliveDrab1")
+                      :foreground "black" :background "OliveDrab2")
   (set-face-attribute 'company-tooltip-common nil
-                      :foreground "black" :background "OliveDrab1")
+                      :foreground "black" :background "OliveDrab2")
   (set-face-attribute 'company-tooltip-common-selection nil
                       :foreground "white" :background "OliveDrab4")
   (set-face-attribute 'company-tooltip-selection nil
@@ -468,6 +497,7 @@
                       :background "OliveDrab4")
   )
 
+;;python補完
 (use-package jedi-core
   :config
   (setq jedi:complete-on-dot t)
@@ -475,6 +505,32 @@
   (add-hook 'python-mode-hook 'jedi:setup)
   (add-to-list 'company-backends 'company-jedi)
   )
+
+;;golang
+(add-hook 'go-mode-hook
+          (lambda ()
+            (setq-default)
+            (setq space-width 4)
+            (setq standard-indent 4)
+            (setq indent-tabs-mode nil)
+            )
+          )
+
+;; (use-package irony
+;;   :config
+;;   (add-hook 'c-mode-hook 'irony-mode)
+;;   (add-hook 'c++-mode-hook 'irony-mode)
+;;   (add-hook 'objc-mode-hook 'irony-mode)
+;;   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;;   (add-to-list 'company-backends 'company-irony) ; backend追加
+;;   )
+
+;; (use-package company-irony
+;;   :after company irony
+;;   :config
+;;   (setq company-backends (remove 'company-clang company-backends))
+;;   (add-to-list 'company-backends 'company-irony)
+;;   )
 
 ;;dashboard(起動画面カスタマイズ)
 ;;CUI環境では崩れる可能性あり

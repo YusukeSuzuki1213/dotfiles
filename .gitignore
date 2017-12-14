@@ -7,3 +7,6 @@
 /.emacs.d/eshell/
 /.emacs.d/dict/
 /.emacs.d/org/
+/.emacs.d/.python-environments/
+/.emacs.d/themes/
+
