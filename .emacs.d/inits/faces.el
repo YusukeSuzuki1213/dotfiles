@@ -1,8 +1,12 @@
+;;--------------------
+;;色設定
+;;--------------------
+
 ;;powerline
 (defun powerline-faces()
   (make-face 'mode-line-1-fg)
   (set-face-attribute 'mode-line-1-fg nil
-                      :foreground "#282c34" :background "#ef8300" :box nil :weight 'bold)
+                      :foreground "#282c34" :background "OliveDrab1" :box nil :weight 'bold)
   (make-face 'mode-line-2-fg)
   (set-face-attribute 'mode-line-2-fg nil
                       :foreground "#aaaaaa" :background "#2f343d" :box nil :weight 'bold)
@@ -13,7 +17,6 @@
   (set-face-attribute 'mode-line-2-arrow nil
                       :foreground "#aaaaaa" :background "#3e4451" :box nil :weight 'bold)
   )
-
 
 ;;rainbow-delimiters-faces
 (defun rainbow-delimiters-faces()

@@ -3,7 +3,7 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("faces.el"
- (filename . "~/dotfiles/.emacs.d/lisp/faces.el")
+ (filename . "~/dotfiles/.emacs.d/inits/faces.el")
  (front-context-string . "\n;;powerline\n(de")
  (rear-context-string . "---------------\n")
  (position . 119))
@@ -17,11 +17,6 @@
  (front-context-string . "\n;;読み込むelsipのパス\n")
  (rear-context-string . "---------------\n")
  (position . 94))
-("packages.el"
- (filename . "~/dotfiles/.emacs.d/lisp/packages.el")
- (front-context-string . "\n;;パッケージ設定\n;;---")
- (rear-context-string . "----------------")
- (position . 31))
 ("init.el"
  (filename . "~/dotfiles/.emacs.d/init.el")
  (front-context-string . ";;init.el ends h")
