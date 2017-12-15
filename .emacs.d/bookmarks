@@ -1,29 +1,35 @@
 ;;;; Emacs Bookmark Format Version 1 ;;;;
 ;;; This format is meant to be slightly human-readable;
-;;; nevertheless, you prob(global-set-key
- (kbd "<f8> <f6>")
- (lambda ()
-   (interactive)
-   (find-file "~/todo.org")))ably don't want to edit it.
+;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
-(("init.el/パッケージ設定"
- (filename . "~/dotfiles/.emacs.d/init.el")
- (front-context-string . ";;パッケージ設定\n;;----")
+(("faces.el"
+ (filename . "~/dotfiles/.emacs.d/lisp/faces.el")
+ (front-context-string . "\n;;powerline\n(de")
  (rear-context-string . "---------------\n")
- (position . 6215))
-("init.el/エディタ設定"
- (filename . "~/dotfiles/.emacs.d/init.el")
- (front-context-string . ";;エディタ設定\n;;-----")
+ (position . 119))
+("01-packages.el"
+ (filename . "~/dotfiles/.emacs.d/inits/01-packages.el")
+ (front-context-string . "\n\n;;usepackage\n(")
+ (rear-context-string . "----------------")
+ (position . 74))
+("00-init.el"
+ (filename . "~/dotfiles/.emacs.d/inits/00-init.el")
+ (front-context-string . "\n;;読み込むelsipのパス\n")
  (rear-context-string . "---------------\n")
- (position . 2817))
-("init.el/基本設定"
+ (position . 94))
+("packages.el"
+ (filename . "~/dotfiles/.emacs.d/lisp/packages.el")
+ (front-context-string . "\n;;パッケージ設定\n;;---")
+ (rear-context-string . "----------------")
+ (position . 31))
+("init.el"
  (filename . "~/dotfiles/.emacs.d/init.el")
- (front-context-string . ";;基本設定\n;;-------")
- (rear-context-string . "---------------\n")
- (position . 148))
+ (front-context-string . ";;init.el ends h")
+ (rear-context-string . "acs.d/inits/\")\n\n")
+ (position . 338))
 ("Cask"
  (filename . "~/dotfiles/.emacs.d/Cask")
- (front-context-string)
- (rear-context-string . "s-on \"company\")\n")
- (position . 303))
+ (front-context-string . ";;Cask ends here")
+ (rear-context-string . "\"init-loader\")\n\n")
+ (position . 943))
 )
