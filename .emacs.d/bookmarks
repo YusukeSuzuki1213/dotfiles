@@ -1,9 +1,9 @@
 ;;;; Emacs Bookmark Format Version 1 ;;;;
 ;;; This format is meant to be slightly human-readable;
-;;; nevertheless, you probably don't want to edit it.
+;;; never(add-hook 'kill-emacs-hootheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("faces.el"
- (filename . "~/dotfiles/.emacs.d/inits/faces.el")
+ (filename . "~/dotfiles/.emacs.d/inits/")
  (front-context-string . "\n;;powerline\n(de")
  (rear-context-string . "---------------\n")
  (position . 119))

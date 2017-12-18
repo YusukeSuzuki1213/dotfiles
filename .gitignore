@@ -7,4 +7,5 @@
 /.emacs.d/org/
 /.emacs.d/.python-environments/
 /.emacs.d/themes/
+/.emacs.d/inits/09-kill-ring-hist.el
 

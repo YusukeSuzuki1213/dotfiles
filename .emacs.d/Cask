@@ -37,5 +37,5 @@
 (depends-on "web-mode")
 (depends-on "powerline")
 (depends-on "init-loader")
-
+(depends-on "hlinum")
 ;;Cask ends here

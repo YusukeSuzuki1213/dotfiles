@@ -3,7 +3,6 @@
 ;;----------------------------------------
 
 ;;読み込むelsipのパス
-
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/inits/")
 (load "faces")
@@ -49,15 +48,6 @@
 
 ;;(global-set-key (kbd "C-c R") (lambda() (interactive)(restart-emacs-)))
 
-;;文字コードを設定する
-(set-language-environment "Japanese")
-(prefer-coding-system 'utf-8)
-(set-file-name-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(setq coding-system-for-read 'utf-8)
-(setq coding-system-for-write 'utf-8)
-
 ;; バックアップファイル(hoge.txt~)を作らない
 (setq backup-inhibited t)
 (setq make-backup-files nil)
@@ -79,11 +69,18 @@
 ;;タイトルバーにファイルパスを表示
 (setq frame-title-format "%f")
 
-;;init.elを開く
+;;00-init.elを開く
 (global-set-key
-(kbd "C-c i")
+(kbd "C-c i 0")
 (lambda () (interactive)
-(switch-to-buffer (find-file-noselect "~/.emacs.d/init.el"))))
+(switch-to-buffer (find-file-noselect "~/.emacs.d/inits/00-init.el"))))
+
+;;01-package.elを開く
+(global-set-key
+(kbd "C-c i 1")
+(lambda () (interactive)
+(switch-to-buffer (find-file-noselect "~/.emacs.d/inits/01-packages.el"))))
+
 
 ;;インストールされたパッケージの内容(package-selected-package)をinit.elに書き込まない
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -196,6 +193,7 @@
                     )
                   )
                 )
+
 
 ;;カラーテーマ
 (load-theme 'zenburn t);;caskでDLしてるのでロードパス確認

@@ -60,6 +60,12 @@
 ;;   ;; (setq YaTeX-template-file "...")
 ;;   )
 
+;;hlinum(行番号ハイライト)
+(use-package hlinum
+  :config
+  (hlinum-activate)
+  )
+
 ;;powerline(モードラインテーマ)
 (use-package powerline
   :config
@@ -385,5 +391,18 @@
 ;;  (auto-install-update-emacswiki-package-name t)
 ;;  ;;install-elispの関数を利用可能にする
 ;;  (auto-install-compatibility-setup))
+
+;;文字コードを設定する
+(coding-system-priority-list 'utf-8)
+(set-default-coding-systems 'utf-8)
+(prefer-coding-system 'utf-8)
+(set-file-name-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(setq default-buffer-file-coding-system 'utf-8)
+(setq coding-system-for-read 'utf-8)
+(setq coding-system-for-write 'utf-8)
+
 
 ;;packages.el ends here
