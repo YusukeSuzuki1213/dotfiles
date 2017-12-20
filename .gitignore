@@ -1,3 +1,4 @@
+/.emacs.d/inits/09-kill-ring-hist.el
 /.emacs.d/.cask/
 /.emacs.d/recentf
 /.emacd.d/bookmarks
@@ -7,5 +8,5 @@
 /.emacs.d/org/
 /.emacs.d/.python-environments/
 /.emacs.d/themes/
-/.emacs.d/inits/09-kill-ring-hist.el
+
 

@@ -5,60 +5,32 @@
 ;;usepackage
 (require 'use-package)
 
-;;org-mode(メモ)
-;;M-RET 見出し
-;;M-right/left 見出しの*の数
-;;C-c C-l リンク作成
-;; (setq org-startup-with-inline-images t)
-;; (global-set-key (kbd "C-c 1 ") 'org-capture)
-;; (global-set-key (kbd "C-c 2") 'org-agenda)
-;; ;; org-captureで2種類のメモを扱うようにする
-;; (setq org-capture-templates
-;;       '(("t" "New TODO" entry
-;;          (file+headline "~/.emacs.d/org/todo.org" "予定")
-;;          "* TODO %?\n\n")
-;;         ("m" "Memo" entry
-;;          (file+headline "~/.emacs.d/org/memo.org" "メモ")
-;;          "* %U%?\n%i\n%a")))
-;; ;; org-agendaでaを押したら予定表とTODOリストを表示
-;; (setq org-agenda-custom-commands
-;;       '(("a" "Agenda and TODO"
-;;          ((agenda "")
-;;           (alltodo "")))))
-;; ;; org-agendaで扱うファイルは複数可だが、
-;; ;; TODO・予定用のファイルのみ指定
-;; (setq org-agenda-files '("~.emacs.d/org/todo.org"))
-;; ;; TODOリストに日付つきTODOを表示しない
-;; (setq org-agenda-todo-ignore-with-date t)
-;; ;; 今日から予定を表示させる
-;; (setq org-agenda-start-on-weekday nil)
-
 ;;yatex(tex環境)
-;; (use-package yatex
-;;   :ensure t
-;;   :mode (("\\.tex$" . yatex-mode))
-;;   :bind (("C-c C-t" . YaTeX-typeset-menu))
-;;   :config
-;;   ;; automatically selected according to current language
-;;   ;; (setq YaTeX-japan t)
-;;   ;; change default kanji-code from 2:JIS to 4:UTF-8
-;;    (setq latex-message-kanji-code 4)
-;;    (setq YaTeX-kanji-code 4)
-;;    (setq YaTeX-coding-system 4)
-;;   ;; variables are declared in yatexlib.el
-;;   (setq YaTeX-inhibit-prefix-letter t)
-;;   ;; local dictionary is NOT needed
-;;   (setq YaTeX-nervous nil)
-;;   ;; variables are declared in yatex.el
-;;   (setq tex-command "ptex2pdf -l")
-;;   (setq bibtex-command "pbibtex")
-;;   (setq dvi2-command "open -a Preview")
-;;   (setq tex-pdfview-command "open -a Preview")
-;;   (setq dviprint-command-format "dvipdfmx %s")
-;;   (setq YaTeX-skip-default-reader t)
-;;   (setq YaTeX-simple-messages t)
-;;   ;; (setq YaTeX-template-file "...")
-;;   )
+(use-package yatex
+  :ensure t
+  :mode (("\\.tex$" . yatex-mode))
+  :bind (("C-c C-t" . YaTeX-typeset-menu))
+  :config
+  ;; automatically selected according to current language
+  ;; (setq YaTeX-japan t)
+  ;; change default kanji-code from 2:JIS to 4:UTF-8
+   (setq latex-message-kanji-code 4)
+   (setq YaTeX-kanji-code 4)
+   (setq YaTeX-coding-system 4)
+  ;; variables are declared in yatexlib.el
+  (setq YaTeX-inhibit-prefix-letter t)
+  ;; local dictionary is NOT needed
+  (setq YaTeX-nervous nil)
+  ;; variables are declared in yatex.el
+  (setq tex-command "ptex2pdf -l")
+  (setq bibtex-command "pbibtex")
+  (setq dvi2-command "open -a Preview")
+  (setq tex-pdfview-command "open -a Preview")
+  (setq dviprint-command-format "dvipdfmx %s")
+  (setq YaTeX-skip-default-reader t)
+  (setq YaTeX-simple-messages t)
+  ;; (setq YaTeX-template-file "...")
+  )
 
 ;;hlinum(行番号ハイライト)
 (use-package hlinum

@@ -194,6 +194,26 @@
                   )
                 )
 
+;;行番号を指定して範囲選択
+(define-key global-map (kbd "C-c s")
+  (lambda(linenum)
+    (interactive "n何行目まで？：")
+    (let (abj)
+      (if (< linenum (line-number-at-pos))
+          (progn
+            (setq abj linenum )
+            (forward-line 1)
+            )
+        (setq abj (+ linenum 1))
+        )
+        (goto-char (point-at-bol))
+        (set-mark-command nil)
+        (goto-line  abj)
+        )
+      )
+    )
+  
+
 
 ;;カラーテーマ
 (load-theme 'zenburn t);;caskでDLしてるのでロードパス確認
