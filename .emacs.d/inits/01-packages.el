@@ -5,6 +5,12 @@
 ;;usepackage
 (require 'use-package)
 
+;;evil(Emacsでvimを使う)
+;; (use-package evil
+;;   :config
+;;   (evil-mode 1)
+;;   )
+
 ;;yatex(tex環境)
 (use-package yatex
   :ensure t
@@ -161,14 +167,27 @@
   )
 
 ;;; ddskk(日本語入力)
-(use-package skk-study
+(use-package skk
   :config
+  (require 'skk-study)
   (setq default-input-method "japanese-skk")
+  (setq skk-server-prog "/usr/local/bin/google-ime-skk") 
+  (setq skk-server-inhibit-startup-server nil)
+  (setq skk-server-host "localhost")
+  (setq skk-server-portnum 55100)
+  (setq skk-share-private-jisyo t)
+  (setq skk-show-candidates-always-pop-to-buffer t) 
+  (setq skk-henkan-show-candidates-rows 2)
+  (setq skk-dcomp-activate t)
+  (setq skk-dcomp-multiple-activate t)
+  (setq skk-dcomp-multiple-rows 10)
+  (setq skk-egg-like-newline t)
+  (setq skk-use-look t)
+  (setq skk-search-katakana 'jisx0201-kana)
+  (setq skk-delete-implies-kakutei nil)
   :bind
-  ("C-x C-j" . skk-mode)
-  ("C-x j" . skk-auto-fill-mode)
+  ("<hiragana-katakana>" . skk-mode)
   )
-
 ;;markdown-mode
 ;;テキストスタイル(C-c C-s i/b)
 ;;リンク(C-c C-l)

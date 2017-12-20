@@ -38,4 +38,5 @@
 (depends-on "powerline")
 (depends-on "init-loader")
 (depends-on "hlinum")
+(depends-on "evil")
 ;;Cask ends here

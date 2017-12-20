@@ -19,7 +19,7 @@
 ;; メニューバーを非表示
 (menu-bar-mode -1)
 
-;;クリップボードとキルリング共有
+;;クリップボードとキルリやング共有
 (setq x-select-enable-clipboard t)
 
 ;;背景の透明度
