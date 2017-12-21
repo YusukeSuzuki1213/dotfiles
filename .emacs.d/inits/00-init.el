@@ -216,8 +216,8 @@
 
 
 ;;カラーテーマ
-(load-theme 'zenburn t);;caskでDLしてるのでロードパス確認
-;;(load-theme 'tsdh-dark t)
+;;(load-theme 'zenburn t);;caskでDLしてるのでロードパス確認
+(load-theme 'tsdh-dark t)
 ;;(load-theme 'deeper-blue t)
 ;;(load-theme 'manoj-dark t)
 ;;(load-theme 'misterioso t)
