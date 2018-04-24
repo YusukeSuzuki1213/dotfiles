@@ -11,6 +11,23 @@
 ;;   (evil-mode 1)
 ;;   )
 
+;;tramp(ssh先のファイルをローカルのemacsで編集)
+(use-package tramp
+  :config
+  (setq tramp-default-method "ssh")
+)
+
+
+;;slime(Common Lisp実行環境)
+(setq slime-net-coding-system 'utf-8-unix)
+(setq inferior-lisp-program "sbcl")
+(setq load-path (cons (expand-file-name "~/.emacs.d/.cask/25.3/elpa/slime-20180413.1720") load-path))
+(use-package slime-autoloads
+  :config
+  (slime-setup '(slime-repl slime-fancy slime-banner slime-company))
+  )
+
+
 ;;yatex(tex環境)
 (use-package yatex
   :ensure t
@@ -186,7 +203,7 @@
   (setq skk-search-katakana 'jisx0201-kana)
   (setq skk-delete-implies-kakutei nil)
   :bind
-  ("<hiragana-katakana>" . skk-mode)
+  ("C-<henkan>" . skk-mode)
   )
 ;;markdown-mode
 ;;テキストスタイル(C-c C-s i/b)
@@ -251,8 +268,8 @@
   (setq company-minimum-prefix-length 2)
   (setq company-selection-wrap-around t)
   (add-hook 'go-mode-hook (lambda ()
-                          (set (make-local-variable 'company-backends) '(company-go))
-                          (company-mode)))
+                            (set (make-local-variable 'company-backends) '(company-go))
+                            (company-mode)))
   (company-faces)
   )
 
@@ -328,7 +345,7 @@
   ("M-x" . helm-M-x);;M-xをhelm仕様に
   ("C-c h" . helm-for-files);;色々検索
   ("C-c k" . helm-show-kill-ring);;キルリング履歴
-  ("C-x C-f" . helm-find-files);;ファイル検索
+  ("C-x C-f" . helm-find-files);;ファイル検索;;rename(M-R) delete(M-D)copy(M-C)
   ("C-c f" . helm-occur);;文字列検索
   ("C-c G" . helm-google-suggest);;ブラウザ検索
   ("C-x C-x" . helm-mark-ring);;マークリング履歴

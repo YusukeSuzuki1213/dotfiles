@@ -39,4 +39,7 @@
 (depends-on "init-loader")
 (depends-on "hlinum")
 (depends-on "evil")
+(depends-on "slime")
+(depends-on "slime-company")
+(depends-on "tramp")
 ;;Cask ends here

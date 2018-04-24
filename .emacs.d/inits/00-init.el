@@ -2,6 +2,10 @@
 ;;基本設定
 ;;----------------------------------------
 
+;;GOPATH
+(setenv "GOPATH" "/home/yusukesuzuki/go")
+(add-to-list 'exec-path (expand-file-name "/home/yusukesuzuki/go/bin"))
+
 ;;読み込むelsipのパス
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (add-to-list 'custom-theme-load-path "~/.emacs.d/inits/")
@@ -111,7 +115,10 @@
 (define-key global-map (kbd "C-c j") 'goto-line)
 
 ;;スクロール
-(setq scroll-conservatively 1)
+(setq 
+
+
+scroll-conservatively 1)
 (setq next-screen-context-lines 1)
 
 ;; 現在行をハイラト
