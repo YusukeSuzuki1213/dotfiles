@@ -11,12 +11,23 @@
 ;;   (evil-mode 1)
 ;;   )
 
+;;haskell-mode
+(use-package haskell-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.hs$" . haskell-mode))
+  (add-to-list 'auto-mode-alist '("\\.lhs$" . literate-haskell-mode))
+  (add-to-list 'auto-mode-alist '("\\.cabal\\'" . haskell-cabal-mode))
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  (add-hook 'haskell-mode-hook 'font-lock-mode)
+  (add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
+  )
+
 ;;tramp(ssh先のファイルをローカルのemacsで編集)
 (use-package tramp
   :config
   (setq tramp-default-method "ssh")
 )
-
 
 ;;slime(Common Lisp実行環境)
 (setq slime-net-coding-system 'utf-8-unix)
@@ -349,7 +360,7 @@
   ("C-c f" . helm-occur);;文字列検索
   ("C-c G" . helm-google-suggest);;ブラウザ検索
   ("C-x C-x" . helm-mark-ring);;マークリング履歴
-  ;;("C-c j" . helm-imenu);;関数や定義検索
+  ("C-c i m" . helm-imenu);;関数や定義検索
   :map helm-map
      ("<tab>" . helm-execute-persistent-action)
      ("C-z" . helm-select-action)

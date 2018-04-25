@@ -42,4 +42,7 @@
 (depends-on "slime")
 (depends-on "slime-company")
 (depends-on "tramp")
+(depends-on "haskell-mode")
+(depends-on "auto-complete")
+(depends-on "ac-haskell-process")
 ;;Cask ends here

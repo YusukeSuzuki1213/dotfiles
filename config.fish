@@ -1,5 +1,5 @@
 set  --export GOPATH $HOME/go
-set  --export PATH /usr/local/go/bin $HOME/.cask/bin $GOPATH/bin /usr/local/bin/peg-multimarkdown $PATH
+set  --export PATH /usr/local/go/bin $HOME/.cask/bin $GOPATH/bin /usr/local/bin/peg-multimarkdown  /home/yusukesuzuki/.local/bin  $PATH
 
 set fish_theme agnoster
 set fish_plugins theme peco
