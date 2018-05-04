@@ -2,6 +2,13 @@
 ;;基本設定
 ;;----------------------------------------
 
+;;マーク履歴
+(setq set-mark-command-repeat-pop t);;C-u C-spc C-spc...
+(setq mark-ring-max 32);;mark-ringを増やす
+
+;;ポイント履歴
+;;(save-place-mode 1)
+
 ;;GOPATH
 (setenv "GOPATH" "/home/yusukesuzuki/go")
 (add-to-list 'exec-path (expand-file-name "/home/yusukesuzuki/go/bin"))
@@ -32,13 +39,22 @@
 ;;起動時に画面横2分割
 (setq inhibit-startup-message t)
 (setq w (selected-window))
-(setq w2 (split-window w nil t))
+(setq w2(split-window w nil t))
 
-;; フォント
-(custom-set-faces
- '(default ((t (:foundry "Source Code Pro" :family "Source Code Pro":height 140)))))
-;; Japanese font
-(set-fontset-font t 'japanese-jisx0208 (font-spec :family "IPAExGothic"))
+
+;; (setq initial-frame-alist '(
+;;    (font . "Ricty-15")
+;;    ))
+;; (set-fontset-font
+;;  nil 'japanese-jisx0208
+;;  (font-spec :family "Ricty"))
+
+;; ;; フォント
+;; (custom-set-faces
+;;  '(default ((t (:foundry "Source Code Pro" :family "Source Code Pro":height 140)))))
+;; ;; Japanese font
+;; (set-fontset-font t 'japanese-jisx0208 (font-spec :family "IPAExGothic"))
+
 
 ;;yes/no入力をy/nに
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -115,10 +131,7 @@
 (define-key global-map (kbd "C-c j") 'goto-line)
 
 ;;スクロール
-(setq 
-
-
-scroll-conservatively 1)
+(setq scroll-conservatively 1)
 (setq next-screen-context-lines 1)
 
 ;; 現在行をハイラト

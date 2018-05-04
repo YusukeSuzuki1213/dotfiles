@@ -12,5 +12,4 @@
 
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/inits/")
-
 ;;init.el ends here

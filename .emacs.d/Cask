@@ -43,4 +43,5 @@
 (depends-on "slime-company")
 (depends-on "tramp")
 (depends-on "haskell-mode")
+(depends-on "goto-chg")
 ;;Cask ends here

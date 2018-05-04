@@ -11,6 +11,13 @@
 ;;   (evil-mode 1)
 ;;   )
 
+;;goto-chg(編集した場所に戻る)
+(use-package goto-chg
+  :bind
+  (("C-c C-b" . goto-last-change))
+  (("C-c C-f" . goto-last-change-reverse))
+  )
+
 ;;haskell-mode
 (use-package haskell-mode
   :config
@@ -52,19 +59,19 @@
    (setq YaTeX-kanji-code 4)
    (setq YaTeX-coding-system 4)
   ;; variables are declared in yatexlib.el
-  (setq YaTeX-inhibit-prefix-letter t)
-  ;; local dictionary is NOT needed
-  (setq YaTeX-nervous nil)
-  ;; variables are declared in yatex.el
-  (setq tex-command "ptex2pdf -l")
-  (setq bibtex-command "pbibtex")
-  (setq dvi2-command "open -a Preview")
-  (setq tex-pdfview-command "open -a Preview")
-  (setq dviprint-command-format "dvipdfmx %s")
-  (setq YaTeX-skip-default-reader t)
-  (setq YaTeX-simple-messages t)
-  ;; (setq YaTeX-template-file "...")
-  )
+   (setq YaTeX-inhibit-prefix-letter t)
+   ;; local dictionary is NOT needed
+   (setq YaTeX-nervous nil)
+   ;; variables are declared in yatex.el
+   (setq tex-command "ptex2pdf -l")
+   (setq bibtex-command "pbibtex")
+   (setq dvi2-command "open -a Preview")
+   (setq tex-pdfview-command "open -a Preview")
+   (setq dviprint-command-format "dvipdfmx %s")
+   (setq YaTeX-skip-default-reader t)
+   (setq YaTeX-simple-messages t)
+   ;; (setq YaTeX-template-file "...")
+   )
 
 ;;hlinum(行番号ハイライト)
 (use-package hlinum
