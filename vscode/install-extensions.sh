@@ -2,5 +2,5 @@
 
 cat ./extensions | while read line
 do
-  code --install-extension $line
+  echo 0 | code --install-extension $line # When newer version exsists, inputing '0' is installing that
 done
