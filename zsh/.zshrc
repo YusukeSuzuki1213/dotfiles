@@ -5,7 +5,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 export TERM=xterm-color
-alias ls='ls -a --color'
+alias ls='ls -la --color'
 
 
 # Source Prezto.
