@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: include<stdlib.h>
-# key: include
-# --
-#include<stdlib.h>

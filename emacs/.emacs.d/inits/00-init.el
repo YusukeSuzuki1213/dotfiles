@@ -2,27 +2,26 @@
 ;;基本設定
 ;;----------------------------------------
 
-;;マーク履歴
-(setq set-mark-command-repeat-pop t);;C-u C-spc C-spc...
+;;マーク履歴(helmで代用可)
+;;(setq set-mark-command-repeat-pop t);;C-u C-spc C-spc...
 (setq mark-ring-max 32);;mark-ringを増やす
 
 ;;ポイント履歴
 ;;(save-place-mode 1)
 
 ;;GOPATH
-(setenv "GOPATH" "/home/yusukesuzuki/go")
-(add-to-list 'exec-path (expand-file-name "/home/yusukesuzuki/go/bin"))
+;;(setenv "GOPATH" "/home/yusukesuzuki/go")
+;;(add-to-list 'exec-path (expand-file-name "/home/yusukesuzuki/go/bin"))
 
 ;;読み込むelsipのパス
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(add-to-list 'custom-theme-load-path "~/.emacs.d/inits/")
+(add-to-list 'load-path "~/.emacs.d/themes/")
 (load "faces")
 
 ;;起動メッセージ非表示
 (setq inhibiwt-startup-message t)
 
 ;;最大化してEmacs起動
-(set-frame-parameter nil 'fullscreen 'maximized)
+(set-frame-parameter nil 'fullscreen 'fullboth)
 
 ;; ツールバーを非表示
 (tool-bar-mode -1)
@@ -41,32 +40,17 @@
 (setq w (selected-window))
 (setq w2(split-window w nil t))
 
-
-;; (setq initial-frame-alist '(
-;;    (font . "Ricty-15")
-;;    ))
-;; (set-fontset-font
-;;  nil 'japanese-jisx0208
-;;  (font-spec :family "Ricty"))
-
 ;; ;; フォント
 ;; (custom-set-faces
 ;;  '(default ((t (:foundry "Source Code Pro" :family "Source Code Pro":height 140)))))
 ;; ;; Japanese font
 ;; (set-fontset-font t 'japanese-jisx0208 (font-spec :family "IPAExGothic"))
 
-
 ;;yes/no入力をy/nに
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ; 簡単にウインドを切り変える
 (define-key global-map (kbd "C-o") 'other-window)
-
-;;Emacs再起動
- (define-key global-map
-   (kbd "C-c R") 'restart-emacs)
-
-;;(global-set-key (kbd "C-c R") (lambda() (interactive)(restart-emacs-)))
 
 ;; バックアップファイル(hoge.txt~)を作らない
 (setq backup-inhibited t)
@@ -95,12 +79,6 @@
 (lambda () (interactive)
 (switch-to-buffer (find-file-noselect "~/.emacs.d/inits/00-init.el"))))
 
-;;01-package.elを開く
-(global-set-key
-(kbd "C-c i 1")
-(lambda () (interactive)
-(switch-to-buffer (find-file-noselect "~/.emacs.d/inits/01-packages.el"))))
-
 
 ;;インストールされたパッケージの内容(package-selected-package)をinit.elに書き込まない
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
@@ -116,10 +94,10 @@
 ;  (turn-on-eldoc-mode)))
 
 ;;日本語切り替え
-(global-set-key (kbd "C-<muhenkan>") 'toggle-input-method)
-(add-hook 'mozc-mode-hook
-  (lambda()
-    (define-key mozc-mode-map (kbd "C-<muhenkan>") 'toggle-input-method)))
+;(global-set-key (kbd "C-<muhenkan>") 'toggle-input-method)
+;(add-hook 'mozc-mode-hook
+;  (lambda()
+;    (define-key mozc-mode-map (kbd "C-<muhenkan>") 'toggle-input-method)))
 
 ;;カーソルの色を入力モードモードごとに変える
 (add-hook 'input-method-activate-hook
@@ -173,11 +151,11 @@
 ;;閉じ括弧補完
 (electric-pair-mode t)
 (add-to-list 'electric-pair-pairs '(?{ . ?})) ;;{}
-;;(add-to-list 'electric-pair-pairs '(?< . ?>)) ;;<>
+;(add-to-list 'electric-pair-pairs '(?< . ?>)) ;;<>
 
 ;;閉じ括弧補完のあといい感じで改行
 (electric-layout-mode t)
-(add-to-list 'electric-layout-rules '(?{ . after) )
+;(add-to-list 'electric-layout-rules '(?{ . after) )
 
 ;;行のどの位置からでも行切り取り
 (global-set-key (kbd "C-c K")
@@ -214,6 +192,15 @@
                   )
                 )
 
+;;M-wをC-.に
+(define-key global-map (kbd "C-.") 'kill-ring-save)
+
+;;DeleteをC-h
+(global-set-key "\C-h" 'delete-backward-char)
+
+;;¥→ \
+(define-key global-map [?¥] [?\\])
+
 ;;行番号を指定して範囲選択
 (define-key global-map (kbd "C-c s")
   (lambda(linenum)
@@ -233,18 +220,15 @@
       )
     )
   
-
-
 ;;カラーテーマ
 ;;(load-theme 'zenburn t);;caskでDLしてるのでロードパス確認
-(load-theme 'tsdh-dark t)
+;;(load-theme 'tsdh-dark t)
 ;;(load-theme 'deeper-blue t)
 ;;(load-theme 'manoj-dark t)
 ;;(load-theme 'misterioso t)
 ;;(load-theme 'tango-dark t)
 ;;(load-theme 'wheatgrass t)
-;;(load-theme 'wombat t)
-
+(load-theme 'wombat t)
 
 ;;起動時に3画面分割してshellを配置
 ;;(defun split-window-and-run-shell()
@@ -265,15 +249,3 @@
 ;        (t (message "match-paren-japanese ignored"))))
 ;(global-set-key [f5] 'match-paren-japanese)
 
-;; 対応するカッコまでをコピー
-;(defun match-paren-kill-ring-save ()
-;  "Copy region from here to the matching parenthesis to kill ring and save."
-;  (interactive)
-;  (set-mark-command nil)
-;  (match-paren-japanese nil)
-;  (forward-char)
-;  (exchange-point-and-mark)
-;  (clipboard-kill-ring-save (mark) (point))
-;  (let ((c (abs (- (mark) (point)))))
-;    (message "match-paren-kill-ring-save: %d characters saved" c)))
-;(glob

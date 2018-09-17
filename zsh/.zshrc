@@ -5,8 +5,7 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 export TERM=xterm-color
-alias ls='ls -la --color'
-
+alias ls='ls -lha --color'
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -21,8 +20,6 @@ fi
     emulate -L zsh
     ls -a
   }
-
-  ls
 
 # zplug
 source $HOME/.zplug/init.zsh
@@ -51,4 +48,12 @@ bindkey '^r' select-history
  
  zplug load
 
-# Customize to your needs...
+
+
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/suzukiyusuke/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/suzukiyusuke/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/suzukiyusuke/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/suzukiyusuke/google-cloud-sdk/completion.zsh.inc'; fi
+alias em='emacs'
