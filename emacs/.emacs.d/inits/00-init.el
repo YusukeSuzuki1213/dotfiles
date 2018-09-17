@@ -225,10 +225,10 @@
 ;;(load-theme 'tsdh-dark t)
 ;;(load-theme 'deeper-blue t)
 ;;(load-theme 'manoj-dark t)
-;;(load-theme 'misterioso t)
+(load-theme 'misterioso t)
 ;;(load-theme 'tango-dark t)
 ;;(load-theme 'wheatgrass t)
-(load-theme 'wombat t)
+;;(load-theme 'wombat t)
 
 ;;起動時に3画面分割してshellを配置
 ;;(defun split-window-and-run-shell()
