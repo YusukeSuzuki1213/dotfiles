@@ -1,7 +1,8 @@
+/.DS_Store
 /emacs/.emacs.d/recentf
-/emacs/.emacd.d/bookmarks
-/emacs/.emacd.d/eshell/
-/emacs/.emacd.d/custom.el
+/emacs/.emacs.d/bookmarks
+/emacs/.emacs.d/eshell/
+/emacs/.emacs.d/custom.el
 /emacs/.emacs.d/dict/
 /emacs/.emacs.d/org/
 /emacs/.emacs.d/.python-environments/
