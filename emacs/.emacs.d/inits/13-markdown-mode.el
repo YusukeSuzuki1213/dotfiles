@@ -1,5 +1,5 @@
 ;;markdown-mode
-;;brew install multimarkdownする必要ありf
+;;brew install multimarkdownする必要あり
 ;;テキストスタイル(C-c C-s i/b)
 ;;リンク(C-c C-l)
 ;;画像(C-c C-i)

@@ -1,6 +1,14 @@
 ;;----------------------------------------
 ;;基本設定
 ;;----------------------------------------
+;; emacs 起動時は英数モードから始める
+(add-hook 'after-init-hook 'mac-change-language-to-us)
+
+;; minibuffer 内は英数モードにする
+(add-hook 'minibuffer-setup-hook 'mac-change-language-to-us)
+
+;; [migemo]isearch のとき IME を英数モードにする
+(add-hook 'isearch-mode-hook 'mac-change-language-to-us)
 
 ;;マーク履歴(helmで代用可)
 ;;(setq set-mark-command-repeat-pop t);;C-u C-spc C-spc...
@@ -221,14 +229,18 @@
     )
   
 ;;カラーテーマ
+;;黒系
 ;;(load-theme 'zenburn t);;caskでDLしてるのでロードパス確認
-;;(load-theme 'tsdh-dark t)
+(load-theme 'tsdh-dark t)
 ;;(load-theme 'deeper-blue t)
 ;;(load-theme 'manoj-dark t)
-(load-theme 'misterioso t)
+;;(load-theme 'misterioso t)
 ;;(load-theme 'tango-dark t)
 ;;(load-theme 'wheatgrass t)
 ;;(load-theme 'wombat t)
+
+;;白系
+;;(load-theme 'adwaita t)
 
 ;;起動時に3画面分割してshellを配置
 ;;(defun split-window-and-run-shell()

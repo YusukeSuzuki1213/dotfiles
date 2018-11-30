@@ -9,7 +9,7 @@
   ("C-c h" . helm-for-files);;色々検索
   ("C-c k" . helm-show-kill-ring);;キルリング履歴
   ("C-x C-f" . helm-find-files);;ファイル検索;;rename(M-R) delete(M-D)copy(M-C)
-  ("C-s" . helm-occur);;文字列検索
+  ;;("C-s" . helm-occur);;文字列検索
   ("C-c G" . helm-google-suggest);;ブラウザ検索
   ("C-x C-x" . helm-mark-ring);;マークリング履歴
   ("C-c i m" . helm-imenu);;関数や定義検索
