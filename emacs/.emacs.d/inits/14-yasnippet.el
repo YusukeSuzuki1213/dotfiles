@@ -1,11 +1,10 @@
-;;ちょっと保留
-;;yasnippet(スニペット登録)
-;;スニペットファイルを落としてくる必要あり
-(use-package yasnippet-snippets)
+;;yasnippet(スニペット貼り付け)
 (use-package yasnippet
   :bind
-  ("C-c Y" . yas-new-snippet)
+  ("C-c Y" . yas-visit-snippet-file)
+  ("C-c y" . yas-insert-snippet)
   :config
   (setq yas-snippet-dirs '("~/.emacs.d/straight/repos/yasnippet-snippets/snippets"))
+  (yas-global-mode 1)
 )
   

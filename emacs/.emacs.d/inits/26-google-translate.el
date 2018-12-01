@@ -4,10 +4,5 @@
 (setq google-translate-translation-directions-alist '(("en" . "ja") ("ja" . "en")) )
 :bind
 ("C-c g" . google-translate-smooth-translate)
-:config
-(defun google-translate--get-b-d1 ()
-  (list 427110 1469889687)
-  )
 )
-
 

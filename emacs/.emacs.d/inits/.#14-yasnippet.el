@@ -1,1 +1,0 @@
-suzukiyusuke@suzukiyuuyuunoMacBook-puro.local.67424
