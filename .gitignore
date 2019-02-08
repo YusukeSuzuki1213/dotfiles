@@ -9,6 +9,7 @@
 /emacs/.emacs.d/url/
 /emacs/.emacs.d/straight/*
 /emacs/.emacs.d/tramp
+/emacs/.emacs.d/eclipse.jdt.ls/
 *.DS_Store
 *#
 

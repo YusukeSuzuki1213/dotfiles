@@ -3,4 +3,6 @@
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook)
-  )
+  (setq dashboard-items '((recents  . 20)))
+  (add-hook 'window-setup-hook (lambda () (forward-line 8) (forward-char 5)))
+)

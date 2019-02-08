@@ -4,12 +4,16 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
+export LDFLAGS="-L/usr/local/opt/openblas/lib"
+export CPPFLAGS="-I/usr/local/opt/openblas/include"
+export PKG_CONFIG_PATH="/usr/local/opt/openblas/lib/pkgconfig"
 export TERM=xterm-color
 alias ls='ls -lha --color'
 alias getpass="openssl rand -base64 15"
 alias ipe='curl ipinfo.io/ip'
 alias emacs='emacs -Q'
 alias em='emacs -Q'
+alias ipe='curl ipinfo.io/ip'
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -36,6 +40,9 @@ if ! zplug check --verbose; then
     echo
 fi
 
+
+
+
 # fzf(検索)
 zplug "junegunn/fzf-bin", \
   from:gh-r, \
@@ -49,8 +56,12 @@ function select-history() {
 }
 zle -N select-history
 bindkey '^r' select-history
- 
- zplug load
+
+# enhanced cd
+zplug "b4b4r07/enhancd", use:init.sh
+ENHANCD_FILTER=fzf; export ENHANCD_FILTER
+ENHANCD_DIR=~/.enhancd; export ENHANCD_DIR
+zplug load
 
 
 

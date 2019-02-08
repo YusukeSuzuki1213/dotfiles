@@ -22,3 +22,6 @@
 
 
 ;; miigemoのmigemo-dictのみではうまく動かん？
+
+;;依存関係など
+;;lsp関係はローカルにlanguage serverが必要

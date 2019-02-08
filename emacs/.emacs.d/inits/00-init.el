@@ -26,7 +26,7 @@
 (load "faces")
 
 ;;起動メッセージ非表示
-(setq inhibiwt-startup-message t)
+;;(setq inhibiwt-startup-message t)
 
 ;;最大化してEmacs起動
 (set-frame-parameter nil 'fullscreen 'fullboth)
@@ -44,9 +44,9 @@
 (set-frame-parameter nil 'alpha 90)
 
 ;;起動時に画面横2分割
-(setq inhibit-startup-message t)
-(setq w (selected-window))
-(setq w2(split-window w nil t))
+;;(setq inhibit-startup-message t)
+;; (setq w (selected-window))
+;; (setq w2(split-window w nil t))
 
 ;; ;; フォント
 ;; (custom-set-faces
@@ -65,10 +65,10 @@
 (setq make-backup-files nil)
 
 ;;バックアップとオートセーブファイルを~/.emacs.d/backups/へ集める
-;(add-to-list 'backup-directory-alist
-;             (cons "." "~/.emacs.d/backups/"))
-;(setq auto-save-file-name-transforms
-;      `((".*" ,(expand-file-name "~/.emacs.d/backups/") t)))
+(add-to-list 'backup-directory-alist
+            (cons "." "~/.emacs.d/backups/"))
+(setq auto-save-file-name-transforms
+     `((".*" ,(expand-file-name "~/.emacs.d/backups/") t)))
 
 ;;オートセーブファイル(.saves-0000-user name)を作らない
 (setq auto-save-list-file-prefix nil)
