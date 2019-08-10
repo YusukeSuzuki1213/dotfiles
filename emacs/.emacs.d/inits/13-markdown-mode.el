@@ -1,4 +1,3 @@
-
 ;;markdown-mode
 ;; リアルタイムプレビューは保留(libxml2でのコンパイルをしなければならない)
 ;;brew install multimarkdownする必要あり
@@ -14,6 +13,8 @@
 ;;コード(C-c C-s c)
 ;;言語指定コード(C-c C-s C)
 ;;プレビュー(C-c C-c p)
+;;一行のソースコード挿入(C-c C-s c)
+;;複数行のソースコード挿入(C-c C-s C)
 (use-package markdown-mode
   :commands (markdown-mode gfm-mode w3m)
   :mode(
