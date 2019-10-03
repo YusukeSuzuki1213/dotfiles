@@ -47130,13 +47130,13 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>899 113 781 780 0 0 1680 1050 </string>
+	<string>622 116 781 646 0 0 1680 1050 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 126 606 469 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>329 457 918 512 0 0 1680 1050 </string>
+	<string>329 432 918 485 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 75 1680 952 0 0 1680 1050 </string>
+	<string>0 74 1680 953 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>212 101 570 452 0 0 1680 1027 </string>
 	<key>New Bookmarks</key>
@@ -47707,7 +47707,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodeProForPowerline-Regular 13</string>
+			<string>CascadiaCode 13</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -47739,6 +47739,8 @@
 				<real>0.089366093277931213</real>
 			</dict>
 			<key>Send Code When Idle</key>
+			<false/>
+			<key>Set Local Environment Vars</key>
 			<false/>
 			<key>Shortcut</key>
 			<string></string>

@@ -55,6 +55,11 @@ ENHANCD_FILTER=fzf; export ENHANCD_FILTER
 ENHANCD_DIR=~/.enhancd; export ENHANCD_DIR
 zplug load
 
+# docker searchをタグ名まで表示
+function docker-search-tag {
+    curl -s https://registry.hub.docker.com/v1/repositories/$1/tags | tr ',' '\n'| grep name |  cut -d '"' -f 4
+}
+
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/suzukiyusuke/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/suzukiyusuke/google-cloud-sdk/path.zsh.inc'; fi
