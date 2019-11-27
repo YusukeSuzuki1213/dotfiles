@@ -6,13 +6,20 @@ ln -sf ~/dotfiles/vim/.vimrc ~/.vimrc
 #fish
 mkdir -p ~/.config/fish
 ln -nfs ~/dotfiles/fish/config.fish ~/.config/fish/config.fish
-#zsh, prezto
-ln -sf ~/dotfiles/zsh/.zshenv ~/.zshenv
-ln -sf ~/dotfiles/zsh/.zshrc ~/.zshrc
-ln -sf ~/dotfiles/zsh/.zpreztorc ~/.zpreztorc
+#zsh 
 ## zplug
 curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
 zplug install
+## prezto
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
+## link
+ln -sf ~/dotfiles/zsh/.zshenv ~/.zshenv
+ln -sf ~/dotfiles/zsh/.zshrc ~/.zshrc
+ln -sf ~/dotfiles/zsh/.zpreztorc ~/.zpreztorc
 
 #vscode
 if [ `which code` ]; then

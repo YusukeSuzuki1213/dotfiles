@@ -4,13 +4,13 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-alias ls='ls -lha'
+alias ls='ls -lha --color'
 alias getpass="openssl rand -base64 15"
 alias ipe='curl ipinfo.io/ip'
 alias emacs='emacs -Q'
 alias em='emacs -Q'
 alias ipe='curl ipinfo.io/ip'
-alias zsh-up='source ~/.zshrc && source ~/.zshenv'
+alias zsh-up='source ~/.zshrc && source ~/.zshenv && source ~/.zpreztorc'
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
