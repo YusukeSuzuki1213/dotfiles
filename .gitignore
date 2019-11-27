@@ -10,7 +10,7 @@
 /emacs/.emacs.d/straight/*
 /emacs/.emacs.d/tramp
 /emacs/.emacs.d/eclipse.jdt.ls/
-*.DS_Store
+.DS_Store
 *#
 
 !versions
