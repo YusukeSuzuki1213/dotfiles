@@ -4,7 +4,7 @@
 # Authors:
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
-alias ls='ls -lha --color'
+alias ls='ls -lha'
 alias getpass="openssl rand -base64 15"
 alias ipe='curl ipinfo.io/ip'
 alias emacs='emacs -Q'
@@ -67,4 +67,4 @@ if [ -f '/Users/suzukiyusuke/google-cloud-sdk/path.zsh.inc' ]; then source '/Use
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/suzukiyusuke/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/suzukiyusuke/google-cloud-sdk/completion.zsh.inc'; fi
 
-eval "$(anyenv init -)"
+
